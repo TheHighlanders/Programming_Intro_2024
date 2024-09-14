@@ -50,9 +50,10 @@ class NumberGuessingBotTest {
 
     @Test
     void testBotPrintsFoundNumber() {
-        String output = outContent.toString().trim();
-        String[] lines = output.split("\n");
-        String lastLine = lines[lines.length - 1].trim();
+        String lastLine = outContent.toString()
+                .lines()
+                .reduce((first, second) -> second)
+                .orElseThrow(() -> new AssertionError("No output generated"));
 
         Pattern pattern = Pattern.compile("Bot found the number: (\\d+)");
         Matcher matcher = pattern.matcher(lastLine);
@@ -60,8 +61,9 @@ class NumberGuessingBotTest {
         assertTrue(matcher.matches(), "Last line should be 'Bot found the number: X', but was: " + lastLine);
 
         int foundNumber = Integer.parseInt(matcher.group(1));
-        assertTrue(foundNumber >= 1 && foundNumber <= 100,
-                "Found number should be between 1 and 100, but was: " + foundNumber);
+        assertAll(
+                () -> assertTrue(foundNumber >= 1, "Found number should be at least 1"),
+                () -> assertTrue(foundNumber <= 100, "Found number should not exceed 100"));
     }
 
     @AfterEach

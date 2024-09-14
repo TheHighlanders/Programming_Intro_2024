@@ -3,7 +3,7 @@ package programming_intro_2024.Intermediate;
 
 /**
  * Your task is to modify the provided number guessing game so that the computer (bot) 
- * automatically guesses the correct number in the least number of attempts.
+ * automatically guesses the correct number consistantly in below 8 attampts.
  */
 
 import static java.lang.System.out;
