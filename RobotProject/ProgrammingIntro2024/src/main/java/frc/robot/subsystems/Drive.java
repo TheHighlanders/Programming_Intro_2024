@@ -18,6 +18,10 @@ import frc.robot.Motor;
 
 public class Drive extends SubsystemBase {
   //TODO: Declare some Motor Objects, one for each side of the robot drivetrain
+  
+  Motor left;
+  Motor right;
+
 
   DoubleSupplier leftSupplier;
   DoubleSupplier rightSupplier;
@@ -27,6 +31,8 @@ public class Drive extends SubsystemBase {
   /** Creates a new Drive. */
   public Drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     //TODO: Initialize Motor Objects
+    left = new Motor();
+    right = new Motor();
 
     this.leftSupplier = leftSupplier;
     this.rightSupplier = rightSupplier;
@@ -56,7 +62,8 @@ public class Drive extends SubsystemBase {
   public void drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     // TODO: Implement this method, to set the motors to the throttle values from
     // the joystick
-
+    left.set(leftSupplier.getAsDouble());
+    right.set(rightSupplier.getAsDouble());
     // TODO: (Optional) Implement Arcade (One Stick) Driving
     // Y Axis controls forward motion, X Axis controls rotation
 
