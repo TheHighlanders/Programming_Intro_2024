@@ -66,7 +66,8 @@ public class Drive extends SubsystemBase {
     drivetrainRight.set(rightSupplierDouble);
     // TODO: (Optional) Implement Arcade (One Stick) Driving
     // Y Axis controls forward motion, X Axis controls rotation
-
+    drivetrainLeft.set(-leftSupplier.getAsDouble() - -rightSupplier.getAsDouble());
+    drivetrainRight.set(-leftSupplier.getAsDouble() + -rightSupplier.getAsDouble());
   }
 
   @Override
