@@ -18,7 +18,8 @@ import frc.robot.Motor;
 
 public class Drive extends SubsystemBase {
   //TODO: Declare some Motor Objects, one for each side of the robot drivetrain
-
+  Motor drivetrainLeft;
+  Motor drivetrainRight;
   DoubleSupplier leftSupplier;
   DoubleSupplier rightSupplier;
   Field2d field = new Field2d();
@@ -27,7 +28,8 @@ public class Drive extends SubsystemBase {
   /** Creates a new Drive. */
   public Drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     //TODO: Initialize Motor Objects
-
+    drivetrainLeft = new Motor();
+    drivetrainRight = new Motor();
     this.leftSupplier = leftSupplier;
     this.rightSupplier = rightSupplier;
 
@@ -56,7 +58,12 @@ public class Drive extends SubsystemBase {
   public void drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     // TODO: Implement this method, to set the motors to the throttle values from
     // the joystick
-
+    leftSupplier.getAsDouble();
+    rightSupplier.getAsDouble();
+    double leftSupplierDouble = leftSupplier.getAsDouble();
+    double rightSupplierDouble = rightSupplier.getAsDouble();
+    drivetrainLeft.set(leftSupplierDouble);
+    drivetrainRight.set(rightSupplierDouble);
     // TODO: (Optional) Implement Arcade (One Stick) Driving
     // Y Axis controls forward motion, X Axis controls rotation
 
@@ -65,10 +72,10 @@ public class Drive extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
-    Util.update(left.getAppliedVoltage(), right.getAppliedVoltage());
+    Util.update(drivetrainLeft.getAppliedVoltage(), drivetrainRight.getAppliedVoltage());
     odo.update(Util.getHeading(), Util.getLeftDistance(), Util.getRightDistance());
     field.setRobotPose(Util.getPose());
-    left.update(0.02);
-    right.update(0.02);
+    drivetrainLeft.update(0.02);
+    drivetrainRight.update(0.02);
   }
 }
