@@ -67,6 +67,8 @@ Motor right;
 
     // TODO: (Optional) Implement Arcade (One Stick) Driving
     // Y Axis controls forward motion, X Axis controls rotation
+    left.set(-leftSupplier.getAsDouble() + rightSupplier.getAsDouble());
+    right.set(-leftSupplier.getAsDouble() - rightSupplier.getAsDouble());
 
   }
 
