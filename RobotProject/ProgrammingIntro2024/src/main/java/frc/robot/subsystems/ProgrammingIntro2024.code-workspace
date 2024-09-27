@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../.."
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"java.server.launchMode": "Standard",
+		"java.debug.settings.onBuildFailureProceed": true
+	}
+}

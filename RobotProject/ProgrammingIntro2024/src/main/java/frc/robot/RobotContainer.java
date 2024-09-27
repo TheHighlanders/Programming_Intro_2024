@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.louncher;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -34,12 +35,12 @@ public class RobotContainer {
     // TODO: Set Default command for the Drive method, to the drive.driveCommand() command
    drive.setDefaultCommand(drive.driveCommand());
   }
-
+private final louncher louncherSubsystem = new louncher();
   /**
    * Use this method to define your trigger->command mappings. 
    */
   private void configureBindings() {
-
+controller.a().whileTrue(louncherSubsystem.launchCommand());
   }
 
   /**
