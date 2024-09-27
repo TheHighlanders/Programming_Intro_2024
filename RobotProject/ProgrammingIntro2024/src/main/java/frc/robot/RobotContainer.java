@@ -24,7 +24,7 @@ public class RobotContainer {
   private final CommandXboxController controller = new CommandXboxController(0);
 
   // The robot's subsystems and commands are defined here...
-  private final Drive drive = new Drive(controller::getLeftY, controller::getRightY);
+  private final Drive drive = new Drive(controller::getLeftY, controller::getRightX);
 
   private final Launcher launcher = new Launcher(); // allows you to bea ble to refer to Launcher() as launcher
 
