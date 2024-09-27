@@ -23,8 +23,8 @@ public class RobotContainer {
   private final CommandXboxController controller = new CommandXboxController(0);
 
   // The robot's subsystems and commands are defined here...
-  private final Drive drive = new Drive(controller::getLeftY, controller::getRightY);
- 
+  private final Drive drive = new Drive(controller::getRightX, controller::getRightY);
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -32,7 +32,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     // TODO: Set Default command for the Drive method, to the drive.driveCommand() command
-   drive.setDefaultCommand(drive.driveCommand());
+    drive.setDefaultCommand(drive.driveCommand());
   }
 
   /**

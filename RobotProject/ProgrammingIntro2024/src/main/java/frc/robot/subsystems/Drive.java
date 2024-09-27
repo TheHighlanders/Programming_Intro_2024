@@ -6,8 +6,6 @@ package frc.robot.subsystems;
 
 import java.util.function.DoubleSupplier;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.system.plant.DCMotor;
@@ -19,9 +17,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Motor;
 
 public class Drive extends SubsystemBase {
-  // TODO: Declare some Motor Objects, one for each side of the robot drivetrain
-  Motor leftMotor;
-  Motor rightMotor;
+  //TODO: Declare some Motor Objects, one for each side of the robot drivetrain
+Motor left;
+Motor right;
   DoubleSupplier leftSupplier;
   DoubleSupplier rightSupplier;
   Field2d field = new Field2d();
@@ -29,9 +27,10 @@ public class Drive extends SubsystemBase {
 
   /** Creates a new Drive. */
   public Drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
-    // TODO: Initialize Motor Objects
-    leftMotor = new Motor();
-    rightMotor = new Motor();
+    //TODO: Initialize Motor Objects
+    left = new Motor();
+    right = new Motor();
+
     this.leftSupplier = leftSupplier;
     this.rightSupplier = rightSupplier;
 
@@ -60,25 +59,26 @@ public class Drive extends SubsystemBase {
   public void drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     // TODO: Implement this method, to set the motors to the throttle values from
     // the joystick
-    double leftSupplierDouble;
-    leftSupplierDouble = leftSupplier.getAsDouble();
-    double rightSupplierDouble;
-    rightSupplierDouble = rightSupplier.getAsDouble();
-    leftMotor.set(leftSupplierDouble);
-    rightMotor.set(rightSupplierDouble);
+   double l =leftSupplier.getAsDouble();
+    double r = rightSupplier.getAsDouble();
+    
+    left.set(l);
+    right.set(r);
+
     // TODO: (Optional) Implement Arcade (One Stick) Driving
     // Y Axis controls forward motion, X Axis controls rotation
-    
+    left.set(-leftSupplier.getAsDouble() + rightSupplier.getAsDouble());
+    right.set(-leftSupplier.getAsDouble() - rightSupplier.getAsDouble());
 
   }
 
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
-    Util.update(leftMotor.getAppliedVoltage(), rightMotor.getAppliedVoltage());
+    Util.update(left.getAppliedVoltage(), right.getAppliedVoltage());
     odo.update(Util.getHeading(), Util.getLeftDistance(), Util.getRightDistance());
     field.setRobotPose(Util.getPose());
-    leftMotor.update(0.02);
-    rightMotor.update(0.02);
+    left.update(0.02);
+    right.update(0.02);
   }
 }
