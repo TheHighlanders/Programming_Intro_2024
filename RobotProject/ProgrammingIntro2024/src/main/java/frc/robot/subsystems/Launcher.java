@@ -34,11 +34,6 @@ public class Launcher extends SubsystemBase {
     bottomFly.set(1);
   }
 
-  public void stop(){
-    topFly.set(0);
-    bottomFly.set(1);
-  }
-
   public void intake(){
     topFly.set(-.5);
     bottomFly.set(-.5);
