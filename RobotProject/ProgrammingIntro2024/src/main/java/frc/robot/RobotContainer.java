@@ -31,11 +31,11 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    // TODO: Set Default command for the Drive method, to the drive.driveCommand() command
+    drive.setDefaultCommand(drive.driveCommand());
   }
 
   /**
-   * Use this method to define your trigger->command mappings. 
+   * Use this method to define your trigger->command mappings.
    */
   private void configureBindings() {
 
