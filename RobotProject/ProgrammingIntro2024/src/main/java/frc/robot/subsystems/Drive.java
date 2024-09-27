@@ -62,8 +62,10 @@ public class Drive extends SubsystemBase {
   public void drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     // TODO: Implement this method, to set the motors to the throttle values from
     // the joystick
-    left.set(leftSupplier.getAsDouble());
-    right.set(rightSupplier.getAsDouble());
+   // left.set(leftSupplier.getAsDouble());
+   // right.set(rightSupplier.getAsDouble());
+    left.set(-leftSupplier.getAsDouble() + rightSupplier.getAsDouble());
+    right.set(-leftSupplier.getAsDouble() - rightSupplier.getAsDouble());
     // TODO: (Optional) Implement Arcade (One Stick) Driving
     // Y Axis controls forward motion, X Axis controls rotation
 
