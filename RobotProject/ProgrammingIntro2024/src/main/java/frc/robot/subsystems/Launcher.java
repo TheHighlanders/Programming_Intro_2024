@@ -12,8 +12,8 @@ import frc.robot.Motor;
 
 public class Launcher extends SubsystemBase {
   /** Creates a new Launcher. */
-  Motor topFly;
-  Motor bottomFly;
+  DCMotorSim topFly;
+  DCMotorSim bottomFly;
   public Launcher() {
     topFly = new Motor();
     bottomFly = new Motor();
@@ -22,8 +22,8 @@ public class Launcher extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Top flywheel RPM: ", topFly.getAngularVelocityRPM());
-    SmartDashboard.putNumber("Bottom flywheel RPM: ", bottomFly.getAngularVelocityRPM());
+    SmartDashboard.putNumber("Top flywheel RPM", topFly.getAngularVelocityRPM());
+    SmartDashboard.putNumber("Bottom flywheel RPM", bottomFly.getAngularVelocityRPM());
     topFly.update(.02);
     bottomFly.update(.02);
   }
