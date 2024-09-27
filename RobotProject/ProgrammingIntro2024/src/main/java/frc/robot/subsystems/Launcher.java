@@ -20,4 +20,17 @@ public class Launcher extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
+  public void startFlyheelOne(){
+    one.set(1);
+  }
+
+  public void startFlyheelTwo(){
+    two.set(1);
+  }
+
+  public void stop(){
+    one.set(0);
+    two.set(1);
+  }
 }
