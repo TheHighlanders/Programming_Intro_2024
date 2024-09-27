@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Launcher;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -25,6 +26,9 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drive drive = new Drive(controller::getLeftY, controller::getRightY);
 
+  private final Launcher launcher = new Launcher(); // allows you to bea ble to refer to Launcher() as launcher
+
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -39,7 +43,12 @@ public class RobotContainer {
    * Use this method to define your trigger->command mappings. 
    */
   private void configureBindings() {
-
+    //controller.a().whileTrue(Launcher.getlaunchCommand());
+    //controller.rightTrigger(.5).whileTrue(Launcher.getlaunchCommand());
+    controller.rightBumper().whileTrue(launcher.getlaunchCommand());
+    // to do the b button you would do .b()
+    // for a trigger you would replace .a() with .rightTrigger("threash hold maybe .5 for example")
+ 
   }
 
   /**
