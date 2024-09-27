@@ -21,6 +21,8 @@ public class Drive extends SubsystemBase {
 
   DoubleSupplier leftSupplier;
   DoubleSupplier rightSupplier;
+  Motor left;
+  Motor right;
   Field2d field = new Field2d();
   DifferentialDriveOdometry odo = new DifferentialDriveOdometry(new Rotation2d(0), 0, 0);
 
@@ -30,6 +32,8 @@ public class Drive extends SubsystemBase {
 
     this.leftSupplier = leftSupplier;
     this.rightSupplier = rightSupplier;
+    left = new Motor();
+    right = new Motor();
 
     SmartDashboard.putData(field);
   }
@@ -56,9 +60,17 @@ public class Drive extends SubsystemBase {
   public void drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     // TODO: Implement this method, to set the motors to the throttle values from
     // the joystick
+    leftSupplier.getAsDouble();
+    rightSupplier.getAsDouble();
+    left.set(-leftSupplier.getAsDouble() + rightSupplier.getAsDouble());
+    right.set(-leftSupplier.getAsDouble() - rightSupplier.getAsDouble());
+
+
+
 
     // TODO: (Optional) Implement Arcade (One Stick) Driving
     // Y Axis controls forward motion, X Axis controls rotation
+  
 
   }
 
