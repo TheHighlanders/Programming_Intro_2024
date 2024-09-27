@@ -24,6 +24,8 @@ public class Launcher extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Top flywheel RPM: ", topFly.getAngularVelocityRPM());
     SmartDashboard.putNumber("Bottom flywheel RPM: ", bottomFly.getAngularVelocityRPM());
+    topFly.update(.02);
+    bottomFly.update(.02);
   }
 
   public void startFlyheeltopFly(){
