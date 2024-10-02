@@ -4,16 +4,21 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Motor;
 
 public class Launcher extends SubsystemBase {
   /** Creates a new Launcher. */
-  Motor one;
-  Motor two;
+  CANSparkMax one;
+  CANSparkMax two;
+
   public Launcher() {
-    one = new Motor();
-    two = new Motor();
+    one = new CANSparkMax(2, MotorType.kBrushed);
+    two = new CANSparkMax(3, MotorType.kBrushed);
   }
 
   @Override
@@ -21,16 +26,28 @@ public class Launcher extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void startFlyheelOne(){
+  public void startFlyheelOne() {
     one.set(1);
   }
 
-  public void startFlyheelTwo(){
+  public void startFlyheelTwo() {
     two.set(1);
   }
 
-  public void stop(){
+  public void stop() {
     one.set(0);
     two.set(1);
+  }
+
+  public void intake() {
+    one.set(-0.5);
+    two.set(-0.5);
+  }
+
+  public Command launchCommand() {
+    return new RunCommand(() -> {
+      startFlyheelOne();
+      startFlyheelTwo();
+    }).finallyDo(() -> stop());
   }
 }
