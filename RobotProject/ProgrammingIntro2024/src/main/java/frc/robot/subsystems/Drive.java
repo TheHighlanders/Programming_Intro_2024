@@ -6,6 +6,10 @@ package frc.robot.subsystems;
 
 import java.util.function.DoubleSupplier;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.system.plant.DCMotor;
@@ -18,18 +22,19 @@ import frc.robot.Motor;
 
 public class Drive extends SubsystemBase {
   //TODO: Declare some Motor Objects, one for each side of the robot drivetrain
-Motor left;
-Motor right;
+  CANSparkMax left;
+  CANSparkMax right;
   DoubleSupplier leftSupplier;
   DoubleSupplier rightSupplier;
   Field2d field = new Field2d();
   DifferentialDriveOdometry odo = new DifferentialDriveOdometry(new Rotation2d(0), 0, 0);
-
+RelativeEncoder leftEncoder;
+RelativeEncoder rightEncoder;
   /** Creates a new Drive. */
   public Drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     //TODO: Initialize Motor Objects
-    left = new Motor();
-    right = new Motor();
+    left = new CANSparkMax(52, MotorType.kBrushless);
+    right = new CANSparkMax(54, MotorType.kBrushless);
 
     this.leftSupplier = leftSupplier;
     this.rightSupplier = rightSupplier;
@@ -47,12 +52,10 @@ Motor right;
     // Subsystem::RunOnce implicitly requires `this` subsystem.
     return run(() -> drive(leftSupplier, rightSupplier));
   }
-
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Left Motor Position", Util.getLeftDistance());
-    SmartDashboard.putNumber("Right Motor Position", Util.getRightDistance());
+    SmartDashboard.putNumber("Left Motor Position", leftEncoder.getPosition());
+    SmartDashboard.putNumber("Right Motor Position", rightEncoder.getPosition());
 
   }
 
@@ -64,6 +67,8 @@ Motor right;
     
     left.set(l);
     right.set(r);
+     leftEncoder = left.getEncoder();
+     rightEncoder = right.getEncoder();
 
     // TODO: (Optional) Implement Arcade (One Stick) Driving
     // Y Axis controls forward motion, X Axis controls rotation
@@ -74,11 +79,6 @@ Motor right;
 
   @Override
   public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
-    Util.update(left.getAppliedVoltage(), right.getAppliedVoltage());
-    odo.update(Util.getHeading(), Util.getLeftDistance(), Util.getRightDistance());
-    field.setRobotPose(Util.getPose());
-    left.update(0.02);
-    right.update(0.02);
+    
   }
 }
