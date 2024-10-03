@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -14,41 +17,46 @@ import frc.robot.Motor;
 
 public class Launcher extends SubsystemBase {
   /** Creates a new Launcher. */
-  DCMotorSim topFly;
-  DCMotorSim bottomFly;
+  //DCMotorSim topFly;
+  //DCMotorSim bottomFly;
+  CANSparkMax topFly;
+  CANSparkMax bottomFly;
+  
   public Launcher() {
-    topFly = new DCMotorSim(DCMotor.getNEO(1),1,0.1);
-    bottomFly = new DCMotorSim(DCMotor.getNEO(1),1,0.1); // motor, gear ratio, moment of intertia
+    //topFly = new DCMotorSim(DCMotor.getNEO(1),1,0.1);
+    //bottomFly = new DCMotorSim(DCMotor.getNEO(1),1,0.1); // motor, gear ratio, moment of intertia
+    topFly = new CANSparkMax(51, MotorType.kBrushless);
+    bottomFly = new CANSparkMax(52, MotorType.kBrushless);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Top flywheel RPM", topFly.getAngularVelocityRPM());
-    SmartDashboard.putNumber("Bottom flywheel RPM", bottomFly.getAngularVelocityRPM());
-    topFly.update(.02);
-    bottomFly.update(.02);
+    //SmartDashboard.putNumber("Top flywheel RPM", topFly.getAngularVelocityRPM());
+    //SmartDashboard.putNumber("Bottom flywheel RPM", bottomFly.getAngularVelocityRPM());
+    ///topFly.update(.02);
+    //bottomFly.update(.02);
   }
 
   public void startFlyheeltopFly(){
-    topFly.setInputVoltage(12);
+    topFly.setVoltage(12);
   }
 
   public void startFlyheelbottomFly(){
-    bottomFly.setInputVoltage(12);
+    bottomFly.setVoltage(12);
   }
 
   public void intake(){
-    topFly.setInputVoltage(-6);
-    bottomFly.setInputVoltage(-6);
+    topFly.setVoltage(-6);
+    bottomFly.setVoltage(-6);
   }
   public void stop(){
-    topFly.setInputVoltage(0);
-    bottomFly.setInputVoltage(0);
+    topFly.setVoltage(0);
+    bottomFly.setVoltage(0);
   }
   public void startLaunchWheel(){
-    topFly.setInputVoltage(10);
-    bottomFly.setInputVoltage(10);
+    topFly.setVoltage(10);
+    bottomFly.setVoltage(10);
   }
   
   public Command getlaunchCommand(){
