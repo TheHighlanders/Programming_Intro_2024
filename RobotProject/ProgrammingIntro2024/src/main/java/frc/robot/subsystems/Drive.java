@@ -6,6 +6,10 @@ package frc.robot.subsystems;
 
 import java.util.function.DoubleSupplier;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.system.plant.DCMotor;
@@ -17,11 +21,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Motor;
 
 public class Drive extends SubsystemBase {
-  //TODO: Declare some Motor Objects, one for each side of the robot drivetrain
-  
-  Motor left;
-  Motor right;
+  // TODO: Declare some Motor Objects, one for each side of the robot drivetrain
 
+  CANSparkMax right;
+  CANSparkMax left;
+
+  RelativeEncoder leftEncoder;
+  RelativeEncoder rightEncoder;
 
   DoubleSupplier leftSupplier;
   DoubleSupplier rightSupplier;
@@ -30,9 +36,12 @@ public class Drive extends SubsystemBase {
 
   /** Creates a new Drive. */
   public Drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
-    //TODO: Initialize Motor Objects
-    left = new Motor();
-    right = new Motor();
+    // TODO: Initialize Motor Objects
+    left = new CANSparkMax(0, MotorType.kBrushless);
+    right = new CANSparkMax(1, MotorType.kBrushless);
+
+    RelativeEncoder leftEncoder = left.getEncoder();
+    RelativeEncoder rightEncoder = right.getEncoder();
 
     this.leftSupplier = leftSupplier;
     this.rightSupplier = rightSupplier;
@@ -54,16 +63,16 @@ public class Drive extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Left Motor Position", Util.getLeftDistance());
-    SmartDashboard.putNumber("Right Motor Position", Util.getRightDistance());
+    SmartDashboard.putNumber("Left Motor Position", leftEncoder.getPosition());  // puts the motors position using the encoder position on the dash board
+    SmartDashboard.putNumber("Right Motor Position", rightEncoder.getPosition());  // puts the motors position using the encoder position on the dash board
 
   }
 
   public void drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     // TODO: Implement this method, to set the motors to the throttle values from
     // the joystick
-   // left.set(leftSupplier.getAsDouble());
-   // right.set(rightSupplier.getAsDouble());
+    // left.set(leftSupplier.getAsDouble());
+    // right.set(rightSupplier.getAsDouble());
     left.set(-leftSupplier.getAsDouble() + rightSupplier.getAsDouble());
     right.set(-leftSupplier.getAsDouble() - rightSupplier.getAsDouble());
     // TODO: (Optional) Implement Arcade (One Stick) Driving
@@ -74,10 +83,6 @@ public class Drive extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
-    Util.update(left.getAppliedVoltage(), right.getAppliedVoltage());
-    odo.update(Util.getHeading(), Util.getLeftDistance(), Util.getRightDistance());
-    field.setRobotPose(Util.getPose());
-    left.update(0.02);
-    right.update(0.02);
+
   }
 }
