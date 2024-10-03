@@ -12,38 +12,39 @@ import frc.robot.Motor;
 
 public class Subsubsystem extends SubsystemBase {
   /** Creates a new Subsubsystem. */
-  
+
   Motor ri = new Motor();
   Motor le = new Motor();
 
-  public void rStartFlywheel() 
-  {
+  public void rStartFlywheel() {
     ri.set(1);
   }
-  public void lStartFlywheel() 
-  {
+
+  public void lStartFlywheel() {
     le.set(1);
   }
-  public void stop() 
-  {
+
+  public void stop() {
     ri.set(0);
     le.set(0);
   }
-  public void intake() 
-  {
+
+  public void intake() {
     ri.set(-0.5);
     le.set(-0.5);
   }
-  public Command launchCMD() 
-  {
+
+  public Command launchCMD() {
     return new RunCommand(
-    () -> {
-      rStartFlywheel();
-      lStartFlywheel();
-    })
-    .finallyDo(() -> stop());
+        () -> {
+          rStartFlywheel();
+          lStartFlywheel();
+        })
+        .finallyDo(() -> stop());
   }
-  public Subsubsystem() {}
+
+  public Subsubsystem() {
+  }
 
   @Override
   public void periodic() {
@@ -51,6 +52,6 @@ public class Subsubsystem extends SubsystemBase {
     ri.update(0.02);
     le.update(0.02);
     SmartDashboard.putNumber("right RPM", ri.getAngularVelocityRPM());
-    SmartDashboard.putNumber("left RPM" , le.getAngularVelocityRPM());
+    SmartDashboard.putNumber("left RPM", le.getAngularVelocityRPM());
   }
 }
