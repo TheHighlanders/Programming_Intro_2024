@@ -25,22 +25,23 @@ public class Drive extends SubsystemBase {
   CANSparkMax left;
   CANSparkMax right;
 
+  RelativeEncoder leftEncoder;
+  RelativeEncoder rightEncoder;
+
   DoubleSupplier leftSupplier;
   DoubleSupplier rightSupplier;
   Field2d field = new Field2d();
   DifferentialDriveOdometry odo = new DifferentialDriveOdometry(new Rotation2d(0), 0, 0);
 
   /** Creates a new Drive. */
-  RelativeEncoder leftEncoder;
-  RelativeEncoder rightEncoder;
   public Drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     // TODO: Initialize Motor Objects
     left = new CANSparkMax(1, MotorType.kBrushless);
     right = new CANSparkMax(2, MotorType.kBrushless);
-    RelativeEncoder leftEncoder = left.getEncoder();
-    RelativeEncoder rightEncoder = right.getEncoder();
 
-
+    leftEncoder = left.getEncoder();
+    rightEncoder = right.getEncoder();
+    
     this.leftSupplier = leftSupplier;
     this.rightSupplier = rightSupplier;
 
@@ -61,8 +62,8 @@ public class Drive extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Left Motor Position", Util.getLeftDistance());
-    SmartDashboard.putNumber("Right Motor Position", Util.getRightDistance());
+    SmartDashboard.putNumber("Left Motor Position", leftEncoder.getPosition());
+    SmartDashboard.putNumber("Right Motor Position", rightEncoder.getPosition());
 
   }
 
@@ -76,13 +77,14 @@ public class Drive extends SubsystemBase {
     // right.set(dRight);
     // TODO: (Optional) Implement Arcade (One Stick) Driving
     // Y Axis controls forward motion, X Axis controls rotation
-    left.set(-dLeft + dRight);
-    right.set(-dLeft - dRight);
+    left.set(-leftSupplier.getAsDouble() + rightSupplier.getAsDouble());
+    right.set(-leftSupplier.getAsDouble() - rightSupplier.getAsDouble());
 
   }
 
   @Override
   public void simulationPeriodic() {
+    // This method will be called once per scheduler run during simulation
 
   }
 }

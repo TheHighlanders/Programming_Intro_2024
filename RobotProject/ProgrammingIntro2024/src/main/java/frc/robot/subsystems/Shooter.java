@@ -4,17 +4,24 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Motor;
 
-public class Subsubsystem extends SubsystemBase {
+public class Shooter extends SubsystemBase {
   /** Creates a new Subsubsystem. */
 
-  Motor ri = new Motor();
-  Motor le = new Motor();
+  CANSparkMax ri = new CANSparkMax(51, MotorType.kBrushless);
+  CANSparkMax le = new CANSparkMax(52, MotorType.kBrushless);
+
+  RelativeEncoder leftEncoder;
+  RelativeEncoder rightEncoder;
 
   public void rStartFlywheel() {
     ri.set(1);
@@ -43,15 +50,16 @@ public class Subsubsystem extends SubsystemBase {
         .finallyDo(() -> stop());
   }
 
-  public Subsubsystem() {
+  public Shooter() {
+    leftEncoder = le.getEncoder();
+    rightEncoder = ri.getEncoder();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    ri.update(0.02);
-    le.update(0.02);
-    SmartDashboard.putNumber("right RPM", ri.getAngularVelocityRPM());
-    SmartDashboard.putNumber("left RPM", le.getAngularVelocityRPM());
+
+    SmartDashboard.putNumber("right RPM", rightEncoder.getVelocity());
+    SmartDashboard.putNumber("left RPM", leftEncoder.getVelocity());
   }
 }

@@ -25,22 +25,24 @@ public class RobotContainer {
 
   // The robot's subsystems and commands are defined here...
   private final Drive drive = new Drive(controller::getRightY, controller::getRightX);
-  private final Shooter luncher = new Shooter();
+  private final Shooter launcher = new Shooter();
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    // TODO: Set Default command for the Drive method, to the drive.driveCommand() command
+    // TODO: Set Default command for the Drive method, to the drive.driveCommand()
+    // command
     drive.setDefaultCommand(drive.driveCommand());
   }
 
   /**
-   * Use this method to define your trigger->command mappings. 
+   * Use this method to define your trigger->command mappings.
    */
   private void configureBindings() {
-    controller.a().whileTrue(luncher.launchCMD());
+    controller.a().whileTrue(launcher.launchCMD());
   }
 
   /**
