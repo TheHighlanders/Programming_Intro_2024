@@ -33,13 +33,14 @@ public class Drive extends SubsystemBase {
   /** Creates a new Drive. */
   RelativeEncoder leftEncoder;
   RelativeEncoder rightEncoder;
+
   public Drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     // TODO: Initialize Motor Objects
-    left = new CANSparkMax(1, MotorType.kBrushless);
-    right = new CANSparkMax(2, MotorType.kBrushless);
+    left = new CANSparkMax(51, MotorType.kBrushless);
+    right = new CANSparkMax(52, MotorType.kBrushless);
+
     RelativeEncoder leftEncoder = left.getEncoder();
     RelativeEncoder rightEncoder = right.getEncoder();
-
 
     this.leftSupplier = leftSupplier;
     this.rightSupplier = rightSupplier;
@@ -61,8 +62,8 @@ public class Drive extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Left Motor Position", Util.getLeftDistance());
-    SmartDashboard.putNumber("Right Motor Position", Util.getRightDistance());
+    SmartDashboard.putNumber("Left Motor Position", leftEncoder.getPosition());
+    SmartDashboard.putNumber("Right Motor Position", rightEncoder.getPosition());
 
   }
 
