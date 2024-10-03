@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Subsubsystem;
+import frc.robot.subsystems.Shooter;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -25,7 +25,7 @@ public class RobotContainer {
 
   // The robot's subsystems and commands are defined here...
   private final Drive drive = new Drive(controller::getRightY, controller::getRightX);
-  private final Subsubsystem luncher = new Subsubsystem();
+  private final Shooter luncher = new Shooter();
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
