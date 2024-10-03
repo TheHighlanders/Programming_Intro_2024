@@ -4,10 +4,15 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.event.NetworkBooleanEvent;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Subsubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -24,6 +29,7 @@ public class RobotContainer {
 
   // The robot's subsystems and commands are defined here...
   private final Drive drive = new Drive(controller::getRightX, controller::getRightY);
+  private final Subsubsystem baller = new Subsubsystem();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -39,6 +45,8 @@ public class RobotContainer {
    * Use this method to define your trigger->command mappings. 
    */
   private void configureBindings() {
+    controller.a().whileTrue(baller.launchCMD());
+    
 
   }
 
