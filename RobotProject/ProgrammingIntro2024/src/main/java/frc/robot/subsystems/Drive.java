@@ -6,17 +6,20 @@ package frc.robot.subsystems;
 
 import java.util.function.DoubleSupplier;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Motor;
 
 public class Drive extends SubsystemBase {
-  Motor left;
-  Motor right;
+  CANSparkMax left;
+  CANSparkMax right;
+  
 
   DoubleSupplier leftSupplier;
   DoubleSupplier rightSupplier;
@@ -25,8 +28,8 @@ public class Drive extends SubsystemBase {
 
   /** Creates a new Drive. */
   public Drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
-    left = new Motor();
-    right = new Motor();
+   left = new CANSparkMax(1, MotorType.kBrushed );
+   right = new CANSparkMax(2, MotorType.kBrushed );
 
     this.leftSupplier = leftSupplier;
     this.rightSupplier = rightSupplier;
@@ -61,10 +64,6 @@ public class Drive extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
-    Util.update(left.getAppliedVoltage(), right.getAppliedVoltage());
-    odo.update(Util.getHeading(), Util.getLeftDistance(), Util.getRightDistance());
-    field.setRobotPose(Util.getPose());
-    left.update(0.02);
-    right.update(0.02);
+  
   }
 }
