@@ -59,5 +59,11 @@ return new RunCommand(()->{
 ).finallyDo(()-> stop ());
 
 }
-  
+public Command getIntakeCommand() {
+return new RunCommand(
+  ()->{
+    intake();
+  })
+  .finallyDo(()-> stop());
+}  
 }
