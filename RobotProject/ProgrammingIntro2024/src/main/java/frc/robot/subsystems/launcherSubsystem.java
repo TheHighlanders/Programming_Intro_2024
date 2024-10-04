@@ -48,14 +48,22 @@ motorUp.set(0);
 motorDown.set(0);
 }
 public void intake(){
-motorUp.set(0.5);
-motorDown.set(0.5);
+motorUp.set(-0.5);
+motorDown.set(-0.5);
 }
 public Command getLaunchCommand(){
 return new RunCommand(()->{
   startFlywheel1();
   startFlywheel2();
 }
+
+).finallyDo(()-> stop ());}
+
+public Command getIntakeCommand(){;
+return new RunCommand(()->{
+  intake();
+}
+
 ).finallyDo(()-> stop ());
 
 }
