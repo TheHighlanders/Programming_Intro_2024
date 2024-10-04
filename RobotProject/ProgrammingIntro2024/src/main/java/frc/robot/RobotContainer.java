@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.launcherSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -24,24 +23,22 @@ public class RobotContainer {
   private final CommandXboxController controller = new CommandXboxController(0);
 
   // The robot's subsystems and commands are defined here...
-  private final Drive drive = new Drive(controller::getRightX, controller::getRightY);
-  private final launcherSubsystem launcherSubsystem = new launcherSubsystem();
+  private final Drive drive = new Drive(controller::getLeftY, controller::getRightY);
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    // TODO: Set Default command for the Drive method, to the drive.driveCommand() command
     drive.setDefaultCommand(drive.driveCommand());
   }
 
   /**
-   * Use this method to define your trigger->command mappings. 
+   * Use this method to define your trigger->command mappings.
    */
   private void configureBindings() {
-controller.a().whileTrue(launcherSubsystem.getLaunchCommand());
-//if trigger you have to (number ex 0.5)
+
   }
 
   /**

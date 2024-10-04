@@ -8,7 +8,7 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 
 /** Add your docs here. */
-public class Motor extends DCMotorSim{
+public class Motor extends DCMotorSim {
     double appliedVoltage;
     public Motor(DCMotor gearbox, double gearing, double jKgMetersSquared) {
         super(gearbox, gearing, jKgMetersSquared);
