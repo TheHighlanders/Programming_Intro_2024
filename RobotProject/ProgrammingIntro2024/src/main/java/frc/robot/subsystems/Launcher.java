@@ -11,9 +11,13 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Motor;
+
+import frc.robot.subsystems.RGB;
+import frc.robot.subsystems.RGB.State;
 
 public class Launcher extends SubsystemBase {
   /** Creates a new Launcher. */
@@ -21,6 +25,8 @@ public class Launcher extends SubsystemBase {
   //DCMotorSim bottomFly;
   CANSparkMax topFly;
   CANSparkMax bottomFly;
+ 
+  private final RGB rgb = new RGB();
   
   public Launcher() {
     //topFly = new DCMotorSim(DCMotor.getNEO(1),1,0.1);
@@ -57,6 +63,7 @@ public class Launcher extends SubsystemBase {
   public void startLaunchWheel(){
     topFly.setVoltage(10);
     bottomFly.setVoltage(10);
+    RGB.setLED(RGB.State.RAINBOW);
   }
   
   public Command getlaunchCommand(){
