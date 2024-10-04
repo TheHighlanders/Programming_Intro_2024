@@ -48,6 +48,7 @@ public class RobotContainer {
     //controller.a().whileTrue(Launcher.getlaunchCommand());
     //controller.rightTrigger(.5).whileTrue(Launcher.getlaunchCommand());
     controller.rightBumper().whileTrue(launcher.getlaunchCommand());
+    controller.leftBumper().whileTrue(launcher.getintakeCommand());
     // to do the b button you would do .b()
     // for a trigger you would replace .a() with .rightTrigger("threash hold maybe .5 for example")
  

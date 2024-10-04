@@ -55,6 +55,7 @@ public class Launcher extends SubsystemBase {
   public void intake(){
     topFly.setVoltage(-6);
     bottomFly.setVoltage(-6);
+    RGB.setLED(RGB.State.ORANGEBLINK);
   }
   public void stop(){
     topFly.setVoltage(0);
@@ -69,6 +70,12 @@ public class Launcher extends SubsystemBase {
   public Command getlaunchCommand(){
 
       return new RunCommand( () -> { startLaunchWheel(); })                     //Both of these lines start spiing the wheels and once completed it stops the wheels
+      .finallyDo(() -> stop()); // stops the wheels at the end of the Command   //Both of these lines start spiing the wheels and once completed it stops the wheels
+
+  }
+    public Command getintakeCommand(){
+
+      return new RunCommand( () -> { intake(); })                     //Both of these lines start spiing the wheels and once completed it stops the wheels
       .finallyDo(() -> stop()); // stops the wheels at the end of the Command   //Both of these lines start spiing the wheels and once completed it stops the wheels
 
 
