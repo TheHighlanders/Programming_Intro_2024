@@ -54,7 +54,12 @@ public Command getIntakeCommand(){
     intake();
   }).finallyDo(()-> stop ());
 }
-public Command getLauncCommand(){
+public Command getSpinUpCommand(){
+  return new RunCommand(()->{
+    startFlywheel1();
+  }).finallyDo(()-> stop ());
+}
+public Command getLaunchCommand(){
 return new RunCommand(()->{
   startFlywheel1();
   startFlywheel2();
