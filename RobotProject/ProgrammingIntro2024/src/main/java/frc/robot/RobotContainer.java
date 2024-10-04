@@ -36,7 +36,7 @@ public class RobotContainer {
   }
 
   /**
-   * Use this method to define your trigger->command mappings. 
+   * Use this method to define your trigger->command mappings.
    */
   private void configureBindings() {
 
