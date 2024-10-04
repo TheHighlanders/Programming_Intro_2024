@@ -44,13 +44,13 @@ public class Launcher extends SubsystemBase {
     //bottomFly.update(.02);
   }
 
-  public void startFlyheeltopFly(){
+/*   public void startFlyheeltopFly(){
     topFly.setVoltage(12);
   }
 
   public void startFlyheelbottomFly(){
     bottomFly.setVoltage(12);
-  }
+  } */
 
   public void intake(){
     topFly.setVoltage(-6);
@@ -66,19 +66,22 @@ public class Launcher extends SubsystemBase {
     bottomFly.setVoltage(10);
     RGB.setLED(RGB.State.RAINBOW);
   }
+    public void spinTop(){
+    topFly.setVoltage(10);
+    RGB.setLED(RGB.State.LOADINGBAR);
+  }
   
   public Command getlaunchCommand(){
-
       return new RunCommand( () -> { startLaunchWheel(); })                     //Both of these lines start spiing the wheels and once completed it stops the wheels
       .finallyDo(() -> stop()); // stops the wheels at the end of the Command   //Both of these lines start spiing the wheels and once completed it stops the wheels
-
   }
     public Command getintakeCommand(){
-
       return new RunCommand( () -> { intake(); })                     //Both of these lines start spiing the wheels and once completed it stops the wheels
       .finallyDo(() -> stop()); // stops the wheels at the end of the Command   //Both of these lines start spiing the wheels and once completed it stops the wheels
-
-
+  }
+      public Command getspinTopCommand(){
+      return new RunCommand( () -> { spinTop(); })                     //Both of these lines start spiing the wheels and once completed it stops the wheels
+      .finallyDo(() -> stop()); // stops the wheels at the end of the Command   //Both of these lines start spiing the wheels and once completed it stops the wheels
   }
 
 
