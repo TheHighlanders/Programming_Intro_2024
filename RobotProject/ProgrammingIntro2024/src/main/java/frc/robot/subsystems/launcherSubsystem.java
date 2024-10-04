@@ -4,6 +4,10 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -12,20 +16,24 @@ import frc.robot.Motor;
 
 public class launcherSubsystem extends SubsystemBase {
   /** Creates a new launcherSubsystem. */
-  Motor motorUp;
-  Motor motorDown;
+  CANSparkMax motorUp;
+  CANSparkMax motorDown;
+  RelativeEncoder goUp;
+  RelativeEncoder goDown;
   public launcherSubsystem() {
-    motorUp = new Motor();
-    motorDown = new Motor();
+    motorUp = new CANSparkMax(1,MotorType.kBrushed);
+    motorDown = new CANSparkMax(2,MotorType.kBrushed);
+    goUp = motorUp.getEncoder();
+    goDown = motorUp.getEncoder();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    motorUp.update(0.02);
-    motorDown.update(0.02);
-    SmartDashboard.putNumber("motorUp RPM", motorUp.getAngularVelocityRPM());
-    SmartDashboard.putNumber("motorDown RPM", motorDown.getAngularVelocityRPM());
+    motorUp.set(0.02);
+    motorDown.set(0.02);
+    SmartDashboard.putNumber("motorUp RPM", goUp.getVelocity());
+    SmartDashboard.putNumber("motorDown RPM", goDown.getVelocity());
   }
 
 //flywheel 
