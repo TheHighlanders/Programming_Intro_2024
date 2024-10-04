@@ -37,10 +37,10 @@ public class launcherSubsystem extends SubsystemBase {
   }
 
 //flywheel 
-public void startFlywheel1() {
+public void startFlyWheel1() {
 motorUp.set(1);
 }
-public void startFlywheel2() {
+public void startFlyWheel2() {
 motorDown.set(1);
 }
 public void stop() {
@@ -53,17 +53,26 @@ motorDown.set(0.5);
 }
 public Command getLaunchCommand(){
 return new RunCommand(()->{
-  startFlywheel1();
-  startFlywheel2();
+  startFlyWheel1();
+  startFlyWheel2();
 }
 ).finallyDo(()-> stop ());
 
 }
+//intake feed wheel command
+
 public Command getIntakeCommand() {
 return new RunCommand(
   ()->{
     intake();
   })
   .finallyDo(()-> stop());
-}  
+} 
+public Command getSpinUpCommand() {
+return new RunCommand(
+  ()->{
+    startFlyWheel1();
+  })
+  .finallyDo(()-> stop());
+}   
 }
