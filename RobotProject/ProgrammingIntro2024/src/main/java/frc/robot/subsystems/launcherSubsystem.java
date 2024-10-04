@@ -4,28 +4,26 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Motor;
 
 public class launcherSubsystem extends SubsystemBase {
   /** Creates a new launcherSubsystem. */
-  Motor motorUp;
-  Motor motorDown;
+  CANSparkMax motorUp;
+  CANSparkMax motorDown;
   public launcherSubsystem() {
-    motorUp = new Motor();
-    motorDown = new Motor();
+    motorUp = new CANSparkMax(51,MotorType.kBrushless);
+    motorDown = new CANSparkMax(52,MotorType.kBrushless);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    motorUp.update(0.02);
-    motorDown.update(0.02);
-    SmartDashboard.putNumber("motorUp RPM", motorUp.getAngularVelocityRPM());
-    SmartDashboard.putNumber("motorDown RPM", motorDown.getAngularVelocityRPM());
   }
 
 //flywheel 
