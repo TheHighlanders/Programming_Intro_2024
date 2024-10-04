@@ -62,4 +62,16 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putNumber("right RPM", rightEncoder.getVelocity());
     SmartDashboard.putNumber("left RPM", leftEncoder.getVelocity());
   }
-}
+  public Command intakeCMD() {
+    return new RunCommand(
+        () -> {
+          intake();
+        })
+        .finallyDo(() -> stop());
+  }  public Command spinupCMD() {
+    return new RunCommand(
+        () -> {
+          rStartFlywheel();
+        })
+        .finallyDo(() -> stop());
+  }}

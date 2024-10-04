@@ -36,8 +36,8 @@ public class Drive extends SubsystemBase {
   /** Creates a new Drive. */
   public Drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     // TODO: Initialize Motor Objects
-    left = new CANSparkMax(1, MotorType.kBrushless);
-    right = new CANSparkMax(2, MotorType.kBrushless);
+    left = new CANSparkMax(1, MotorType.kBrushed);
+    right = new CANSparkMax(2, MotorType.kBrushed);
 
     leftEncoder = left.getEncoder();
     rightEncoder = right.getEncoder();
