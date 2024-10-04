@@ -43,6 +43,10 @@ motorUp.set(1);
 public void startFlywheel2() {
 motorDown.set(1);
 }
+public void startLaunchFlywheel(){
+  motorUp.set(1);
+  motorDown.set(1);
+}
 public void stop() {
 motorUp.set(0);
 motorDown.set(0);
@@ -67,5 +71,10 @@ return new RunCommand(()->{
 ).finallyDo(()-> stop ());
 
 }
+public Command getCommand(){
+return new RunCommand(()->{
+  startLaunchFlywheel();
+}
+).finallyDo(()-> stop());}
   
 }
