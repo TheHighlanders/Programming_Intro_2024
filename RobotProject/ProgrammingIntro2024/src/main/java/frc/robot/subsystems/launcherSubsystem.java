@@ -21,8 +21,8 @@ public class launcherSubsystem extends SubsystemBase {
   RelativeEncoder upEncoder;
   RelativeEncoder downEncoder;
   public launcherSubsystem() {
-    motorUp = new CANSparkMax(3, MotorType.kBrushed );
-    motorDown = new CANSparkMax(4, MotorType.kBrushed );
+    motorUp = new CANSparkMax(51, MotorType.kBrushed );
+    motorDown = new CANSparkMax(52, MotorType.kBrushed );
     upEncoder = motorUp.getEncoder();
     downEncoder = motorDown.getEncoder();
   }
