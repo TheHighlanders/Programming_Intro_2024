@@ -23,6 +23,8 @@ public class Drive extends SubsystemBase {
   //TODO: Declare some Motor Objects, one for each side of the robot drivetrain
   CANSparkMax drivetrainLeft;
   CANSparkMax drivetrainRight;
+  CANSparkMax drivetrainLeft2;
+  CANSparkMax drivetrainRight2;
   DoubleSupplier leftSupplier;
   DoubleSupplier rightSupplier;
   Field2d field = new Field2d();
@@ -31,10 +33,14 @@ public class Drive extends SubsystemBase {
   /** Creates a new Drive. */
   public Drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     //TODO: Initialize Motor Objects
-    drivetrainLeft = new CANSparkMax(2,MotorType.kBrushed);
     drivetrainRight = new CANSparkMax(1,MotorType.kBrushed);
+    drivetrainLeft = new CANSparkMax(2,MotorType.kBrushed);
+    drivetrainLeft2 = new CANSparkMax(3,MotorType.kBrushed);
+    drivetrainRight2 = new CANSparkMax(4,MotorType.kBrushed);
     this.leftSupplier = leftSupplier;
     this.rightSupplier = rightSupplier;
+    drivetrainLeft2.follow(drivetrainLeft);
+    drivetrainRight2.follow(drivetrainRight);
 
     SmartDashboard.putData(field);
   }
