@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Drive;
@@ -52,6 +53,9 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return new PrintCommand("Auton");
+    return launcher.getSpinUpCommand()
+    .andThen(Commands.waitSeconds(2))
+    .andThen(launcher.getLaunchCommand().withTimeout(1))
+    .andThen(drive.driveBackwards().withTimeout(3));
   }
 }

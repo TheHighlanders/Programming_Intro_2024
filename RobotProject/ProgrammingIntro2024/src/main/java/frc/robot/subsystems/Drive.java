@@ -42,6 +42,7 @@ public class Drive extends SubsystemBase {
     drivetrainLeft2.follow(drivetrainLeft);
     drivetrainRight2.follow(drivetrainRight);
 
+
     SmartDashboard.putData(field);
   }
 
@@ -54,6 +55,10 @@ public class Drive extends SubsystemBase {
     // Inline construction of command goes here.
     // Subsystem::RunOnce implicitly requires `this` subsystem.
     return run(() -> drive(leftSupplier, rightSupplier));
+  }
+   
+  public Command driveBackwards() {
+    return run(() -> drive(()->{return 1;}, ()->{return 0;}));
   }
 
   @Override
