@@ -17,8 +17,8 @@ public class launcherSubsystem extends SubsystemBase {
   CANSparkMax motorUp;
   CANSparkMax motorDown;
   public launcherSubsystem() {
-    motorUp = new CANSparkMax(51,MotorType.kBrushless);
-    motorDown = new CANSparkMax(52,MotorType.kBrushless);
+    motorUp = new CANSparkMax(5,MotorType.kBrushless);
+    motorDown = new CANSparkMax(6,MotorType.kBrushless);
   }
 
   @Override
