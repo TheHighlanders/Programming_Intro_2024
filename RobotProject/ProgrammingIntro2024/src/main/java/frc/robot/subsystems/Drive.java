@@ -31,8 +31,8 @@ public class Drive extends SubsystemBase {
   /** Creates a new Drive. */
   public Drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     //TODO: Initialize Motor Objects
-    drivetrainLeft = new CANSparkMax(1,MotorType.kBrushed);
-    drivetrainRight = new CANSparkMax(2,MotorType.kBrushed);
+    drivetrainLeft = new CANSparkMax(2,MotorType.kBrushed);
+    drivetrainRight = new CANSparkMax(1,MotorType.kBrushed);
     this.leftSupplier = leftSupplier;
     this.rightSupplier = rightSupplier;
 
