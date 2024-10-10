@@ -31,8 +31,8 @@ public class Launcher extends SubsystemBase {
   public Launcher() {
     //topFly = new DCMotorSim(DCMotor.getNEO(1),1,0.1);
     //bottomFly = new DCMotorSim(DCMotor.getNEO(1),1,0.1); // motor, gear ratio, moment of intertia
-    topFly = new CANSparkMax(51, MotorType.kBrushless);
-    bottomFly = new CANSparkMax(52, MotorType.kBrushless);
+    topFly = new CANSparkMax(5, MotorType.kBrushless);
+    bottomFly = new CANSparkMax(6, MotorType.kBrushless);
   }
 
   @Override
