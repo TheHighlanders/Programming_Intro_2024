@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.yeetCommand;
 import frc.robot.Motor;
 
 public class Subsubsystem extends SubsystemBase {
@@ -40,10 +41,20 @@ public class Subsubsystem extends SubsystemBase {
   }
   public Command launchCMD() 
   {
-    return new RunCommand(
+    return new yeetCommand(
     () -> {
       rStartFlywheel();
       lStartFlywheel();
+    })
+    .finallyDo(() -> stop());
+  }
+
+   public Command intakeCMD() 
+  {
+    return new yeetCommand(
+    () -> {
+      intake();
+      
     })
     .finallyDo(() -> stop());
   }
@@ -63,3 +74,4 @@ public class Subsubsystem extends SubsystemBase {
     SmartDashboard.putNumber("left RPM" , rightEncoder.getPosition());
   }
 }
+

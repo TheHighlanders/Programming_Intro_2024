@@ -28,8 +28,8 @@ public class Drive extends SubsystemBase {
   DoubleSupplier rightSupplier;
   Field2d field = new Field2d();
   DifferentialDriveOdometry odo = new DifferentialDriveOdometry(new Rotation2d(0), 0, 0);
-RelativeEncoder leftEncoder;
-RelativeEncoder rightEncoder;
+  RelativeEncoder leftEncoder;
+  RelativeEncoder rightEncoder;
   /** Creates a new Drive. */
   public Drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     //TODO: Initialize Motor Objects
