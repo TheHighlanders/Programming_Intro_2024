@@ -24,6 +24,8 @@ public class Drive extends SubsystemBase {
   // TODO: Declare some Motor Objects, one for each side of the robot drivetrain
   CANSparkMax left;
   CANSparkMax right;
+  CANSparkMax left2;
+  CANSparkMax right2;
 
   DoubleSupplier leftSupplier;
   DoubleSupplier rightSupplier;
@@ -36,11 +38,12 @@ public class Drive extends SubsystemBase {
 
   public Drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     // TODO: Initialize Motor Objects
-    left = new CANSparkMax(51, MotorType.kBrushless);
-    right = new CANSparkMax(52, MotorType.kBrushless);
-
-    RelativeEncoder leftEncoder = left.getEncoder();
-    RelativeEncoder rightEncoder = right.getEncoder();
+    left = new CANSparkMax(2, MotorType.kBrushed);
+    right = new CANSparkMax(1, MotorType.kBrushed);
+    left2 = new CANSparkMax(3, MotorType.kBrushed);
+    right2 = new CANSparkMax(4, MotorType.kBrushed);
+    left2.follow(left);
+    right2.follow(right);
 
     this.leftSupplier = leftSupplier;
     this.rightSupplier = rightSupplier;
@@ -57,6 +60,11 @@ public class Drive extends SubsystemBase {
     // Inline construction of command goes here.
     // Subsystem::RunOnce implicitly requires `this` subsystem.
     return run(() -> drive(leftSupplier, rightSupplier));
+  }
+  public Command backItUp() {
+    // Inline construction of command goes here.
+    // Subsystem::RunOnce implicitly requires `this` subsystem.
+    return run(() -> drive(()->{return 1;}, ()->{return 0;}));
   }
 
   @Override

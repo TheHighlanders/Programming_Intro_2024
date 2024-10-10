@@ -16,8 +16,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Subsubsystem extends SubsystemBase {
   /** Creates a new Subsubsystem. */
 
-  CANSparkMax le = new CANSparkMax(3, MotorType.kBrushless);
-  CANSparkMax ri = new CANSparkMax(4, MotorType.kBrushless);
+  CANSparkMax le = new CANSparkMax(5, MotorType.kBrushless);
+  CANSparkMax ri = new CANSparkMax(6, MotorType.kBrushless);
 
   public void rStartFlywheel() {
     ri.set(1);
@@ -37,6 +37,14 @@ public class Subsubsystem extends SubsystemBase {
     le.set(-0.5);
   }
 
+  public Command intakeCMD() {
+    return new RunCommand(
+        () -> {
+          intake();
+        })
+        .finallyDo(() -> stop());
+  }
+
   public Command launchCMD() {
     return new RunCommand(
         () -> {
@@ -44,6 +52,14 @@ public class Subsubsystem extends SubsystemBase {
           lStartFlywheel();
         })
         .finallyDo(() -> stop());
+  }
+
+  public Command spinUpCMD() {
+    return new RunCommand(
+        () -> {
+          rStartFlywheel();
+        });
+       
   }
 
   RelativeEncoder leftEncoder;
