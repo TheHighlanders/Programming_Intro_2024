@@ -63,7 +63,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return launcher.getspinTopCommand().andThen(Commands.waitSeconds(2)).andThen(launcher.getlaunchCommand()).andThen(Commands.waitSeconds(1));
-
+    return launcher.getspinTopCommand().andThen(Commands.waitSeconds(2)).andThen(launcher.getlaunchCommand().withTimeout(1)).andThen(drive.drivebackCommand(.8,0).withTimeout(4)); //standard auto command that we made for kitbot
+    //return launcher.getspinTopCommand().andThen(Commands.waitSeconds(2)).andThen(launcher.getlaunchCommand().withTimeout(1)).andThen(drive.drivebackCommand(.8,0).withTimeout(3)).andThen(drive.drivebackCommand(1,-.3).withTimeout(1.5)); //goofy go twords sorce auto
   }
 }

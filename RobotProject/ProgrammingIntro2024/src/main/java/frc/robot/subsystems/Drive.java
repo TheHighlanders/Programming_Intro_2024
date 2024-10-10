@@ -63,6 +63,12 @@ public class Drive extends SubsystemBase {
     return run(() -> drive(leftSupplier, rightSupplier));
   }
 
+  public Command drivebackCommand(double speedys, double spinnys) {
+    // Inline construction of command goes here.
+    // Subsystem::RunOnce implicitly requires `this` subsystem.
+    return run(() -> driveback(speedys, spinnys)); // (speed foward/back, right/left rotation)
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -82,6 +88,18 @@ public class Drive extends SubsystemBase {
     // Y Axis controls forward motion, X Axis controls rotation
 
   }
+    public void driveback(double left, double right) {
+    // TODO: Implement this method, to set the motors to the throttle values from
+    // the joystick
+    // left.set(leftSupplier.getAsDouble());
+    // right.set(rightSupplier.getAsDouble());
+    left1.set(-left + right);
+    right1.set(-left - right);
+    // TODO: (Optional) Implement Arcade (One Stick) Driving
+    // Y Axis controls forward motion, X Axis controls rotation
+
+  }
+
 
   @Override
   public void simulationPeriodic() {
