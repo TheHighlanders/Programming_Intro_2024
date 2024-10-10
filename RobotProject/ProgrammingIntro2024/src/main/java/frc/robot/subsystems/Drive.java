@@ -23,11 +23,13 @@ import frc.robot.Motor;
 public class Drive extends SubsystemBase {
   // TODO: Declare some Motor Objects, one for each side of the robot drivetrain
 
-  CANSparkMax right;
-  CANSparkMax left;
+  CANSparkMax right1;
+  CANSparkMax left1;
+  CANSparkMax right2;
+  CANSparkMax left2;
 
-  RelativeEncoder leftEncoder;
-  RelativeEncoder rightEncoder;
+//  RelativeEncoder leftEncoder;
+//  RelativeEncoder rightEncoder;
 
   DoubleSupplier leftSupplier;
   DoubleSupplier rightSupplier;
@@ -37,11 +39,12 @@ public class Drive extends SubsystemBase {
   /** Creates a new Drive. */
   public Drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     // TODO: Initialize Motor Objects
-    left = new CANSparkMax(2, MotorType.kBrushed);
-    right = new CANSparkMax(1, MotorType.kBrushed);
-
-    RelativeEncoder leftEncoder = left.getEncoder();
-    RelativeEncoder rightEncoder = right.getEncoder();
+    left1 = new CANSparkMax(2, MotorType.kBrushed);
+    right1 = new CANSparkMax(1, MotorType.kBrushed);
+    left2.follow(left1);
+    right2.follow(right1);
+    //RelativeEncoder leftEncoder = left1.getEncoder(); // used for brushless motors
+   // RelativeEncoder rightEncoder = right1.getEncoder();
 
     this.leftSupplier = leftSupplier;
     this.rightSupplier = rightSupplier;
@@ -63,8 +66,8 @@ public class Drive extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Left Motor Position", leftEncoder.getPosition());  // puts the motors position using the encoder position on the dash board
-    SmartDashboard.putNumber("Right Motor Position", rightEncoder.getPosition());  // puts the motors position using the encoder position on the dash board
+    //SmartDashboard.putNumber("Left Motor Position", leftEncoder.getPosition());  // puts the motors position using the encoder position on the dash board
+    //SmartDashboard.putNumber("Right Motor Position", rightEncoder.getPosition());  // puts the motors position using the encoder position on the dash board
 
   }
 
@@ -73,8 +76,8 @@ public class Drive extends SubsystemBase {
     // the joystick
     // left.set(leftSupplier.getAsDouble());
     // right.set(rightSupplier.getAsDouble());
-    left.set(-leftSupplier.getAsDouble() + rightSupplier.getAsDouble());
-    right.set(-leftSupplier.getAsDouble() - rightSupplier.getAsDouble());
+    left1.set(-leftSupplier.getAsDouble() + rightSupplier.getAsDouble());
+    right1.set(-leftSupplier.getAsDouble() - rightSupplier.getAsDouble());
     // TODO: (Optional) Implement Arcade (One Stick) Driving
     // Y Axis controls forward motion, X Axis controls rotation
 
