@@ -42,6 +42,8 @@ public class RobotContainer {
    */
   private void configureBindings() {
 controller.a().whileTrue(launcher.getLaunchCommand());
+controller.b().whileTrue(launcher.getIntakeCommand());
+controller.x().whileTrue(launcher.getSpinupCommand());
   }
 
   /**
