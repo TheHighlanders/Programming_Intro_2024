@@ -11,8 +11,10 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Motor;
 
@@ -70,6 +72,7 @@ public class Launcher extends SubsystemBase {
     topFly.setVoltage(10);
     RGB.setLED(RGB.State.LOADINGBAR);
   }
+
   
   public Command getlaunchCommand(){
       return new RunCommand( () -> { startLaunchWheel(); })                     //Both of these lines start spiing the wheels and once completed it stops the wheels
@@ -82,6 +85,14 @@ public class Launcher extends SubsystemBase {
       public Command getspinTopCommand(){
       return new RunCommand( () -> { spinTop(); })                     //Both of these lines start spiing the wheels and once completed it stops the wheels
       .finallyDo(() -> stop()); // stops the wheels at the end of the Command   //Both of these lines start spiing the wheels and once completed it stops the wheels
+  }
+        public Command spinUpAndShoot(){
+      return new SequentialCommandGroup(getspinTopCommand(),Commands.waitSeconds(.8), getlaunchCommand(), Commands.waitSeconds(.8))                     //Both of these lines start spiing the wheels and once completed it stops the wheels
+      .finallyDo(() -> stop()); // stops the wheels at the end of the Command   //Both of these lines start spiing the wheels and once completed it stops the wheels
+  }
+      public Command getSpinStopCommand(){
+      return new RunCommand( () -> { spinTop(); });                    //Both of these lines start spiing the wheels and once completed it stops the wheels
+ 
   }
 
 

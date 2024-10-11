@@ -48,9 +48,10 @@ public class RobotContainer {
   private void configureBindings() {
     //controller.a().whileTrue(Launcher.getlaunchCommand());
     //controller.rightTrigger(.5).whileTrue(Launcher.getlaunchCommand());
-    controller.rightBumper().whileTrue(launcher.getlaunchCommand());
+    //controller.rightBumper().whileTrue(launcher.getlaunchCommand());
     controller.leftBumper().whileTrue(launcher.getintakeCommand());
-    controller.rightTrigger(.5).whileTrue(launcher.getspinTopCommand());
+    //controller.rightTrigger(.5).whileTrue(launcher.getspinTopCommand());
+    controller.rightTrigger(.5).whileTrue(launcher.spinUpAndShoot());
     // to do the b button you would do .b()
     // for a trigger you would replace .a() with .rightTrigger("threash hold maybe .5 for example")
  
@@ -63,7 +64,38 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return launcher.getspinTopCommand().andThen(Commands.waitSeconds(2)).andThen(launcher.getlaunchCommand().withTimeout(1)).andThen(drive.drivebackCommand(.8,0).withTimeout(4)); //standard auto command that we made for kitbot
-    //return launcher.getspinTopCommand().andThen(Commands.waitSeconds(2)).andThen(launcher.getlaunchCommand().withTimeout(1)).andThen(drive.drivebackCommand(.8,0).withTimeout(3)).andThen(drive.drivebackCommand(1,-.3).withTimeout(1.5)); //goofy go twords sorce auto
+    //goreturn launcher.getspinTopCommand().andThen(Commands.waitSeconds(2)).andThen(launcher.getlaunchCommand().withTimeout(1)).andThen(drive.drivebackCommand(.8,0).withTimeout(4)); //standard auto command that we made for kitbot
+    final double coolDownTime = 1;
+
+    return launcher.getspinTopCommand() //start spin up of top
+    .andThen(Commands.waitSeconds(2)) // wait for full spin up
+    .andThen(launcher.getlaunchCommand() // launch
+    .withTimeout(coolDownTime)) // wait for launch to be completed
+    .andThen(drive.drivebackCommand(.8,0)
+    .withTimeout(3)) // go back at 80% power for 3 seconds, back up
+    .andThen(drive.drivebackCommand(0,0) // cool down
+    .withTimeout(coolDownTime)) // cool down for 1 second
+    .andThen(drive.drivebackCommand(0,-.4) //spin at + 30% power for 1.5 seconds, turn right a bit
+    .withTimeout(.5)) //spinnytime
+    .andThen(drive.drivebackCommand(0,0) // cool down
+    .withTimeout(coolDownTime)) // cool down for 1 second
+    .andThen(drive.drivebackCommand(.8,0) // go back a bit
+    .withTimeout(3)) // go back at 80% power for 3 seconds
+    .andThen(drive.drivebackCommand(0,0) // cool down
+    .withTimeout(coolDownTime)) // cool down for 1 second
+    .andThen(drive.drivebackCommand(0,+.4) //spin back to original orientationat + 30% power for 1.5 seconds // spin left a bit
+    .withTimeout(.5)) //spinnytime
+    .andThen(drive.drivebackCommand(0,0) // cool down
+    .withTimeout(coolDownTime)) // cool down for 1 second
+    .andThen(drive.drivebackCommand(.8,0) // go back a bit
+    .withTimeout(3)) // go back at 80% power for 3 seconds
+    .andThen(drive.drivebackCommand(0,0) // cool down
+    .withTimeout(coolDownTime)) // cool down for 1 second
+    .andThen(drive.drivebackCommand(0,1) // go back a bit
+    .withTimeout(.8)) // go back at 80% power for 3 seconds
+    .andThen(drive.drivebackCommand(0,0) // cool down
+    .withTimeout(coolDownTime));
+    
+    //goofy go twords sorce auto positive spin is turn to right and positive go is ? so far
   }
 }
