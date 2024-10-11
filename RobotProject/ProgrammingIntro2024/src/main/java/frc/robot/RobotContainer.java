@@ -51,7 +51,7 @@ public class RobotContainer {
     //controller.rightBumper().whileTrue(launcher.getlaunchCommand());
     controller.rightTrigger(.5).whileTrue(launcher.getintakeCommand());
     //controller.rightTrigger(.5).whileTrue(launcher.getspinTopCommand());
-    controller.rightBumper().whileTrue(launcher.spinUpAndShoot());
+    controller.rightBumper().whileTrue(launcher.spinUpAndShootCommand());
     // to do the b button you would do .b()
     // for a trigger you would replace .a() with .rightTrigger("threash hold maybe .5 for example")
  
@@ -67,10 +67,8 @@ public class RobotContainer {
     //goreturn launcher.getspinTopCommand().andThen(Commands.waitSeconds(2)).andThen(launcher.getlaunchCommand().withTimeout(1)).andThen(drive.drivebackCommand(.8,0).withTimeout(4)); //standard auto command that we made for kitbot
     final double coolDownTime = 1;
 
-    return launcher.getspinTopCommand() //start spin up of top
-    .andThen(Commands.waitSeconds(2)) // wait for full spin up
-    .andThen(launcher.getlaunchCommand() // launch
-    .withTimeout(coolDownTime)) // wait for launch to be completed
+    return launcher.spinUpAndShootCommand() // launch
+    .withTimeout(coolDownTime) // wait for launch to be completed
     .andThen(drive.drivebackCommand(.8,0)
     .withTimeout(3)) // go back at 80% power for 3 seconds, back up
     .andThen(drive.drivebackCommand(0,0) // cool down
