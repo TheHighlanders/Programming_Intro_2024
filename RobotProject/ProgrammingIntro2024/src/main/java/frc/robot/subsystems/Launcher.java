@@ -18,8 +18,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Motor;
 
-import frc.robot.subsystems.RGB;
-import frc.robot.subsystems.RGB.State;
 
 public class Launcher extends SubsystemBase {
   /** Creates a new Launcher. */

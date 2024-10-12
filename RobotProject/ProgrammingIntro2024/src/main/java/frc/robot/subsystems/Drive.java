@@ -47,6 +47,13 @@ public class Drive extends SubsystemBase {
     right2.follow(right1);
     //RelativeEncoder leftEncoder = left1.getEncoder(); // used for brushless motors
    // RelativeEncoder rightEncoder = right1.getEncoder();
+=======
+    left = new CANSparkMax(1, MotorType.kBrushless);
+    right = new CANSparkMax(2, MotorType.kBrushless);
+
+    RelativeEncoder leftEncoder = left.getEncoder();
+    RelativeEncoder rightEncoder = right.getEncoder();
+>>>>>>> Stashed changes
 
     this.leftSupplier = leftSupplier;
     this.rightSupplier = rightSupplier;
