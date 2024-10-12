@@ -55,6 +55,6 @@ public class RobotContainer {
     // An example command will be run in autonomous
     return launcher.getSpinUpCommand().withTimeout(1)
     .andThen(launcher.getLaunchCommand().withTimeout(1))
-    .andThen(drive.driveBackwards().withTimeout(3));
+    .andThen(drive.driveBackwards().withTimeout(1));
   }
 }
