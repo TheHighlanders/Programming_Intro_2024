@@ -41,6 +41,8 @@ public class Drive extends SubsystemBase {
     // TODO: Initialize Motor Objects
     left1 = new CANSparkMax(2, MotorType.kBrushed);
     right1 = new CANSparkMax(1, MotorType.kBrushed);
+    left2 = new CANSparkMax(3, MotorType.kBrushed);
+    right2 = new CANSparkMax(4, MotorType.kBrushed);
     left2.follow(left1);
     right2.follow(right1);
     //RelativeEncoder leftEncoder = left1.getEncoder(); // used for brushless motors

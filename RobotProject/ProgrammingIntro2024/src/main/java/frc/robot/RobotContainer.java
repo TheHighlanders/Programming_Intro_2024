@@ -30,7 +30,7 @@ public class RobotContainer {
 
   private final Launcher launcher = new Launcher(); // allows you to bea ble to refer to Launcher() as launcher
 
-  private final RGB rgb = new RGB();
+ // private final RGB rgb = new RGB();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -70,7 +70,7 @@ public class RobotContainer {
     return launcher.spinUpAndShootCommand() // launch
     .withTimeout(coolDownTime) // wait for launch to be completed
     .andThen(drive.drivebackCommand(.8,0)
-    .withTimeout(3)) // go back at 80% power for 3 seconds, back up
+    .withTimeout(1)) // go back at 80% power for 3 seconds, back up
     .andThen(drive.drivebackCommand(0,0) // cool down
     .withTimeout(coolDownTime)) // cool down for 1 second
     .andThen(drive.drivebackCommand(0,-.4) //spin at + 30% power for 1.5 seconds, turn right a bit
@@ -78,7 +78,7 @@ public class RobotContainer {
     .andThen(drive.drivebackCommand(0,0) // cool down
     .withTimeout(coolDownTime)) // cool down for 1 second
     .andThen(drive.drivebackCommand(.8,0) // go back a bit
-    .withTimeout(3)) // go back at 80% power for 3 seconds
+    .withTimeout(1)) // go back at 80% power for 3 seconds
     .andThen(drive.drivebackCommand(0,0) // cool down
     .withTimeout(coolDownTime)) // cool down for 1 second
     .andThen(drive.drivebackCommand(0,+.4) //spin back to original orientationat + 30% power for 1.5 seconds // spin left a bit
@@ -86,9 +86,9 @@ public class RobotContainer {
     .andThen(drive.drivebackCommand(0,0) // cool down
     .withTimeout(coolDownTime)) // cool down for 1 second
     .andThen(drive.drivebackCommand(.8,0) // go back a bit
-    .withTimeout(3)) // go back at 80% power for 3 seconds
+    .withTimeout(1)) // go back at 80% power for 3 seconds
     .andThen(drive.drivebackCommand(0,0) // cool down
-    .withTimeout(coolDownTime)) // cool down for 1 second
+    .withTimeout(coolDownTime)) // c                       ```4544RR44ool down for 1 second
     .andThen(drive.drivebackCommand(0,1) // go back a bit
     .withTimeout(.8)) // go back at 80% power for 3 seconds
     .andThen(drive.drivebackCommand(0,0) // cool down

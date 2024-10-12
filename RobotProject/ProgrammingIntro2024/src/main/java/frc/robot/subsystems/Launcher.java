@@ -28,7 +28,7 @@ public class Launcher extends SubsystemBase {
   CANSparkMax topFly;
   CANSparkMax bottomFly;
  
-  private final RGB rgb = new RGB();
+  // private final RGB rgb = new RGB();
   
   public Launcher() {
     //topFly = new DCMotorSim(DCMotor.getNEO(1),1,0.1);
@@ -57,7 +57,7 @@ public class Launcher extends SubsystemBase {
   public void intake(){
     topFly.setVoltage(-6);
     bottomFly.setVoltage(-6);
-    RGB.setLED(RGB.State.ORANGEBLINK);
+ //   RGB.setLED(RGB.State.ORANGEBLINK);
   }
   public void stop(){
     topFly.setVoltage(0);
@@ -66,11 +66,11 @@ public class Launcher extends SubsystemBase {
   public void startLaunchWheel(){
     topFly.setVoltage(10);
     bottomFly.setVoltage(10);
-    RGB.setLED(RGB.State.RAINBOW);
+ //   RGB.setLED(RGB.State.RAINBOW);
   }
     public void spinTop(){
     topFly.setVoltage(10);
-    RGB.setLED(RGB.State.LOADINGBAR);
+   // RGB.setLED(RGB.State.LOADINGBAR);
   }
 
   
