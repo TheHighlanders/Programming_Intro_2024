@@ -84,8 +84,8 @@ public class Drive extends SubsystemBase {
     // the joystick
     // left.set(leftSupplier.getAsDouble());
     // right.set(rightSupplier.getAsDouble());
-    left1.set(-leftSupplier.getAsDouble() + rightSupplier.getAsDouble());
-    right1.set(-leftSupplier.getAsDouble() - rightSupplier.getAsDouble());
+    left1.set(-leftSupplier.getAsDouble() - -rightSupplier.getAsDouble());
+    right1.set(-leftSupplier.getAsDouble() + - rightSupplier.getAsDouble());
     // TODO: (Optional) Implement Arcade (One Stick) Driving
     // Y Axis controls forward motion, X Axis controls rotation
 
