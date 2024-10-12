@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Launcher;
-import frc.robot.subsystems.RGB;
 // import frc.robot.subsystems.RGB;
 
 /**
@@ -31,7 +30,11 @@ public class RobotContainer {
 
   private final Launcher launcher = new Launcher(); // allows you to bea ble to refer to Launcher() as launcher
 
+<<<<<<< Updated upstream
  // private final RGB rgb = new RGB();
+=======
+  // private final RGB rgb = new RGB();
+>>>>>>> Stashed changes
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.

@@ -39,6 +39,7 @@ public class Drive extends SubsystemBase {
   /** Creates a new Drive. */
   public Drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
     // TODO: Initialize Motor Objects
+<<<<<<< Updated upstream
     left1 = new CANSparkMax(2, MotorType.kBrushed);
     right1 = new CANSparkMax(1, MotorType.kBrushed);
     left2 = new CANSparkMax(3, MotorType.kBrushed);
@@ -81,8 +82,13 @@ public class Drive extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+<<<<<<< Updated upstream
     //SmartDashboard.putNumber("Left Motor Position", leftEncoder.getPosition());  // puts the motors position using the encoder position on the dash board
     //SmartDashboard.putNumber("Right Motor Position", rightEncoder.getPosition());  // puts the motors position using the encoder position on the dash board
+=======
+    // SmartDashboard.putNumber("Left Motor Position", leftEncoder.getPosition());  // puts the motors position using the encoder position on the dash board
+    // SmartDashboard.putNumber("Right Motor Position", rightEncoder.getPosition());  // puts the motors position using the encoder position on the dash board
+>>>>>>> Stashed changes
 
   }
 
