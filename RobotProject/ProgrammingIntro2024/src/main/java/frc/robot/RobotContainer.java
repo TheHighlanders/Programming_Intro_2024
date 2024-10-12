@@ -25,7 +25,7 @@ public class RobotContainer {
   private final CommandXboxController controller = new CommandXboxController(0);
 
   // The robot's subsystems and commands are defined here...
-  private final Drive drive = new Drive(controller::getRightY, ()->{return controller.getRightX() * Math.signum(controller.getRightX());}); 
+  private final Drive drive = new Drive(controller::getRightY, ()->{return controller.getRightX() * controller.getRightX() * Math.signum(controller.getRightX());}); 
   private final launcherSubsystem launcher = new launcherSubsystem();
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -53,8 +53,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return launcher.getSpinUpCommand()
-    .andThen(Commands.waitSeconds(2))
+    return launcher.getSpinUpCommand().withTimeout(1)
     .andThen(launcher.getLaunchCommand().withTimeout(1))
     .andThen(drive.driveBackwards().withTimeout(3));
   }

@@ -57,7 +57,7 @@ public Command getIntakeCommand(){
 public Command getSpinUpCommand(){
   return new RunCommand(()->{
     startFlywheel1();
-  }).finallyDo(()-> stop ());
+  });
 }
 public Command getLaunchCommand(){
 return new RunCommand(()->{
