@@ -87,14 +87,17 @@ public class Launcher extends SubsystemBase {
       .finallyDo(() -> stop()); // stops the wheels at the end of the Command   //Both of these lines start spiing the wheels and once completed it stops the wheels
   }
         public Command spinUpAndShootCommand(){
-      return new SequentialCommandGroup(getspinTopCommand(),Commands.waitSeconds(1), getlaunchCommand(), Commands.waitSeconds(1))                     //Both of these lines start spiing the wheels and once completed it stops the wheels
+      return new SequentialCommandGroup(getspinTopCommand(),Commands.waitSeconds(1), getZooomCommand(), Commands.waitSeconds(1))                     //Both of these lines start spiing the wheels and once completed it stops the wheels
       .finallyDo(() -> stop()); // stops the wheels at the end of the Command   //Both of these lines start spiing the wheels and once completed it stops the wheels
   }
       public Command getSpinStopCommand(){
       return new RunCommand( () -> { spinTop(); });                    //Both of these lines start spiing the wheels and once completed it stops the wheels
  
   }
-
+      public Command getZooomCommand(){
+    return new RunCommand( () -> { startLaunchWheel(); }) ;                  //Both of these lines start spiing the wheels and once completed it stops the wheels
+  
+}
 
 
 }

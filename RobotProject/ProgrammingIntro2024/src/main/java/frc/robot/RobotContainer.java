@@ -40,6 +40,7 @@ public class RobotContainer {
     configureBindings();
     // TODO: Set Default command for the Drive method, to the drive.driveCommand() command
     drive.setDefaultCommand(drive.driveCommand());
+
   }
 
   /**
@@ -74,7 +75,7 @@ public class RobotContainer {
     .andThen(drive.drivebackCommand(0,0) // cool down
     .withTimeout(coolDownTime)) // cool down for 1 second
     .andThen(drive.drivebackCommand(0,-.4) //spin at + 30% power for 1.5 seconds, turn right a bit
-    .withTimeout(.5)) //spinnytime
+    .withTimeout(.15)) //spinnytime
     .andThen(drive.drivebackCommand(0,0) // cool down
     .withTimeout(coolDownTime)) // cool down for 1 second
     .andThen(drive.drivebackCommand(.8,0) // go back a bit
@@ -82,13 +83,13 @@ public class RobotContainer {
     .andThen(drive.drivebackCommand(0,0) // cool down
     .withTimeout(coolDownTime)) // cool down for 1 second
     .andThen(drive.drivebackCommand(0,+.4) //spin back to original orientationat + 30% power for 1.5 seconds // spin left a bit
-    .withTimeout(.5)) //spinnytime
+    .withTimeout(.15)) //spinnytime
     .andThen(drive.drivebackCommand(0,0) // cool down
     .withTimeout(coolDownTime)) // cool down for 1 second
     .andThen(drive.drivebackCommand(.8,0) // go back a bit
     .withTimeout(1)) // go back at 80% power for 3 seconds
     .andThen(drive.drivebackCommand(0,0) // cool down
-    .withTimeout(coolDownTime)) // c                       ```4544RR44ool down for 1 second
+    .withTimeout(coolDownTime)) // cool down for 1 second
     .andThen(drive.drivebackCommand(0,1) // go back a bit
     .withTimeout(.8)) // go back at 80% power for 3 seconds
     .andThen(drive.drivebackCommand(0,0) // cool down
