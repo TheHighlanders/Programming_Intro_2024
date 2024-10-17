@@ -7,6 +7,8 @@ package frc.robot.subsystems;
 import java.util.function.DoubleSupplier;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -25,11 +27,17 @@ public class Drive extends SubsystemBase {
   DoubleSupplier rightSupplier;
   Field2d field = new Field2d();
   DifferentialDriveOdometry odo = new DifferentialDriveOdometry(new Rotation2d(0), 0, 0);
-
+  RelativeEncoder encoder;
+  SparkPIDController pid;
   /** Creates a new Drive. */
   public Drive(DoubleSupplier leftSupplier, DoubleSupplier rightSupplier) {
    left = new CANSparkMax(1, MotorType.kBrushed );
    right = new CANSparkMax(2, MotorType.kBrushed );
+   
+   pid = left.getPIDController();
+   encoder = left.getEncoder();
+   pid.setP(1);
+   pid.setD(Math.PI);
 
     this.leftSupplier = leftSupplier;
     this.rightSupplier = rightSupplier;
