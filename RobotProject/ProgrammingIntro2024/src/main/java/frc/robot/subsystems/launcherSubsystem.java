@@ -21,8 +21,8 @@ public class launcherSubsystem extends SubsystemBase {
   RelativeEncoder encoderUp;
   RelativeEncoder encoderDown;
   public launcherSubsystem() {
-    motorUp = new CANSparkMax(51,MotorType.kBrushless);
-    motorDown = new CANSparkMax(52,MotorType.kBrushless);
+    motorUp = new CANSparkMax(5,MotorType.kBrushless);
+    motorDown = new CANSparkMax(6,MotorType.kBrushless);
     encoderUp = motorUp.getEncoder();
     encoderDown = motorDown.getEncoder();
   }
@@ -57,7 +57,7 @@ public Command getIntakeCommand(){
 public Command getSpinUpCommand(){
   return new RunCommand(()->{
     startFlywheel1();
-  }).finallyDo(()-> stop ());
+  });
 }
 public Command getLaunchCommand(){
 return new RunCommand(()->{
