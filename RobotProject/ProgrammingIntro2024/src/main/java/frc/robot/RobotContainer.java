@@ -5,12 +5,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Launcher;
-import frc.robot.subsystems.RGB;
+import frc.robot.subsystems.Intake;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -30,7 +28,8 @@ public class RobotContainer {
 
   private final Launcher launcher = new Launcher(); // allows you to bea ble to refer to Launcher() as launcher
 
-  private final RGB rgb = new RGB();
+  private final Intake intake = new Intake();
+  
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -49,9 +48,11 @@ public class RobotContainer {
     //controller.a().whileTrue(Launcher.getlaunchCommand());
     //controller.rightTrigger(.5).whileTrue(Launcher.getlaunchCommand());
     //controller.rightBumper().whileTrue(launcher.getlaunchCommand());
-    controller.rightTrigger(.5).whileTrue(launcher.getintakeCommand());
+    controller.rightTrigger(.5).whileTrue(launcher.getintakeShooterCommand());
     //controller.rightTrigger(.5).whileTrue(launcher.getspinTopCommand());
     controller.rightBumper().whileTrue(launcher.spinUpAndShootCommand());
+    controller.x().whileTrue(intake.getIntakeCommand());
+    controller.a().whileTrue(intake.getExhaustNoteCommand());
     // to do the b button you would do .b()
     // for a trigger you would replace .a() with .rightTrigger("threash hold maybe .5 for example")
  
