@@ -57,11 +57,6 @@ public class Launcher extends SubsystemBase {
   public void intake(){
     topFly.setVoltage(-6);
     bottomFly.setVoltage(-6);
-<<<<<<< Updated upstream
- //   RGB.setLED(RGB.State.ORANGEBLINK);
-=======
-    // RGB.setLED(RGB.State.ORANGEBLINK);
->>>>>>> Stashed changes
   }
   public void stop(){
     topFly.setVoltage(0);
@@ -70,15 +65,9 @@ public class Launcher extends SubsystemBase {
   public void startLaunchWheel(){
     topFly.setVoltage(10);
     bottomFly.setVoltage(10);
-<<<<<<< Updated upstream
- //   RGB.setLED(RGB.State.RAINBOW);
-=======
-    // RGB.setLED(RGB.State.RAINBOW);
->>>>>>> Stashed changes
   }
     public void spinTop(){
     topFly.setVoltage(10);
-   // RGB.setLED(RGB.State.LOADINGBAR);
   }
 
   
