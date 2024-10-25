@@ -18,7 +18,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Motor;
 
-
+// import frc.robot.subsystems.RGB;
+// import frc.robot.subsystems.RGB.State;
 
 public class Launcher extends SubsystemBase {
   /** Creates a new Launcher. */
@@ -27,7 +28,7 @@ public class Launcher extends SubsystemBase {
   CANSparkMax topFly;
   CANSparkMax bottomFly;
  
-
+  // private final RGB rgb = new RGB();
   
   public Launcher() {
     //topFly = new DCMotorSim(DCMotor.getNEO(1),1,0.1);
@@ -53,10 +54,14 @@ public class Launcher extends SubsystemBase {
     bottomFly.setVoltage(12);
   } */
 
-  public void intakeShooter(){
+  public void intake(){
     topFly.setVoltage(-6);
     bottomFly.setVoltage(-6);
-
+<<<<<<< Updated upstream
+ //   RGB.setLED(RGB.State.ORANGEBLINK);
+=======
+    // RGB.setLED(RGB.State.ORANGEBLINK);
+>>>>>>> Stashed changes
   }
   public void stop(){
     topFly.setVoltage(0);
@@ -65,11 +70,15 @@ public class Launcher extends SubsystemBase {
   public void startLaunchWheel(){
     topFly.setVoltage(10);
     bottomFly.setVoltage(10);
-
+<<<<<<< Updated upstream
+ //   RGB.setLED(RGB.State.RAINBOW);
+=======
+    // RGB.setLED(RGB.State.RAINBOW);
+>>>>>>> Stashed changes
   }
     public void spinTop(){
     topFly.setVoltage(10);
-
+   // RGB.setLED(RGB.State.LOADINGBAR);
   }
 
   
@@ -77,8 +86,8 @@ public class Launcher extends SubsystemBase {
       return new RunCommand( () -> { startLaunchWheel(); })                     //Both of these lines start spiing the wheels and once completed it stops the wheels
       .finallyDo(() -> stop()); // stops the wheels at the end of the Command   //Both of these lines start spiing the wheels and once completed it stops the wheels
   }
-    public Command getintakeShooterCommand(){
-      return new RunCommand( () -> { intakeShooter(); })                     //Both of these lines start spiing the wheels and once completed it stops the wheels
+    public Command getintakeCommand(){
+      return new RunCommand( () -> { intake(); })                     //Both of these lines start spiing the wheels and once completed it stops the wheels
       .finallyDo(() -> stop()); // stops the wheels at the end of the Command   //Both of these lines start spiing the wheels and once completed it stops the wheels
   }
       public Command getspinTopCommand(){
@@ -86,14 +95,17 @@ public class Launcher extends SubsystemBase {
       .finallyDo(() -> stop()); // stops the wheels at the end of the Command   //Both of these lines start spiing the wheels and once completed it stops the wheels
   }
         public Command spinUpAndShootCommand(){
-      return new SequentialCommandGroup(getspinTopCommand(),Commands.waitSeconds(1), getlaunchCommand(), Commands.waitSeconds(1))                     //Both of these lines start spiing the wheels and once completed it stops the wheels
+      return new SequentialCommandGroup(getspinTopCommand(),Commands.waitSeconds(1), getZooomCommand(), Commands.waitSeconds(1))                     //Both of these lines start spiing the wheels and once completed it stops the wheels
       .finallyDo(() -> stop()); // stops the wheels at the end of the Command   //Both of these lines start spiing the wheels and once completed it stops the wheels
   }
       public Command getSpinStopCommand(){
       return new RunCommand( () -> { spinTop(); });                    //Both of these lines start spiing the wheels and once completed it stops the wheels
  
   }
-
+      public Command getZooomCommand(){
+    return new RunCommand( () -> { startLaunchWheel(); }) ;                  //Both of these lines start spiing the wheels and once completed it stops the wheels
+  
+}
 
 
 }
