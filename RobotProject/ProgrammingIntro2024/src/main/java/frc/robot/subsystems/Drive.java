@@ -46,6 +46,8 @@ public class Drive extends SubsystemBase {
     // TODO: Initialize Motor Objects
     left1 = new CANSparkMax(2, MotorType.kBrushed);
     right1 = new CANSparkMax(1, MotorType.kBrushed);
+    left2 = new CANSparkMax(3, MotorType.kBrushed);
+    right2 = new CANSparkMax(4, MotorType.kBrushed);
     left2.follow(left1);
     right2.follow(right1);
     //RelativeEncoder leftEncoder = left1.getEncoder(); // used for brushless motors
@@ -63,7 +65,7 @@ public class Drive extends SubsystemBase {
     SmartDashboard.putData(field);
   }
 
-  /**
+  /**s
    * Example command factory method.
    *
    * @return a command
@@ -93,8 +95,8 @@ public class Drive extends SubsystemBase {
     // the joystick
     // left.set(leftSupplier.getAsDouble());
     // right.set(rightSupplier.getAsDouble());
-    left1.set(-leftSupplier.getAsDouble() + rightSupplier.getAsDouble());
-    right1.set(-leftSupplier.getAsDouble() - rightSupplier.getAsDouble());
+    left1.set(-leftSupplier.getAsDouble() - -rightSupplier.getAsDouble());
+    right1.set(-leftSupplier.getAsDouble() + - rightSupplier.getAsDouble());
     // TODO: (Optional) Implement Arcade (One Stick) Driving
     // Y Axis controls forward motion, X Axis controls rotation
 
