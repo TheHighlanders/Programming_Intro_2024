@@ -43,6 +43,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return testingWheel.setpointCMD(0).withTimeout(5).andThen(testingWheel.setpointCMD(135));
+    return testingWheel.setpointCMD(90).withTimeout(5).andThen(testingWheel.setpointCMD(135));
   }
 }  

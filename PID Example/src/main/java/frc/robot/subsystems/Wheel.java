@@ -24,10 +24,10 @@ public class Wheel extends SubsystemBase {
   private SparkPIDController wheelPID;
 
   //PID Controller constants!
-  private double p = 0;
+  private double p = 0.1;
   private double i = 0;
-  private double d = 0;
-
+  private double d = 0.01;
+  private double tolerance = 1;
   private double setpoint = 0;
 
   RelativeEncoder wheelEncoder;
@@ -37,7 +37,7 @@ public class Wheel extends SubsystemBase {
 
     // Populates the wheelPID field by getting the PID Controller of the motor controller
     wheelPID = wheelMotor.getPIDController();
-
+  
     wheelPID.setP(p);
     wheelPID.setI(i);
     wheelPID.setD(d);
@@ -52,10 +52,22 @@ public class Wheel extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Position", wheelEncoder.getPosition());
     SmartDashboard.putNumber("Setpoint", setpoint);
+    
+    SmartDashboard.putBoolean("Condition", Math.abs(wheelEncoder.getPosition()-setpoint) <= tolerance);
+    if(Math.abs(wheelEncoder.getPosition()-setpoint) <= tolerance) {
+      wheelPID.setP(0);
+      wheelPID.setI(0);
+      wheelPID.setD(0);
+      wheelPID.setReference(0,ControlType.kDutyCycle);
+    }
+
   }
 
   public Command setpointCMD(double setpointDeg){
     return new RunCommand(()->{
+      wheelPID.setP(p);
+      wheelPID.setI(i);
+      wheelPID.setD(d);
       wheelPID.setReference(setpointDeg, ControlType.kPosition);
       setpoint = setpointDeg;
       }
