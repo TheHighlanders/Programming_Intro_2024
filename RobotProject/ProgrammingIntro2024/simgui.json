@@ -5,6 +5,11 @@
       "/SmartDashboard/Field": "Field2d"
     }
   },
+  "NetworkTables": {
+    "Transitory Values": {
+      "open": false
+    }
+  },
   "NetworkTables Info": {
     "visible": true
   }

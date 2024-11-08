@@ -5,12 +5,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Launcher;
-// import frc.robot.subsystems.RGB;
+import frc.robot.subsystems.intake;
+import frc.robot.subsystems.launcherSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -26,40 +25,25 @@ public class RobotContainer {
   private final CommandXboxController controller = new CommandXboxController(0);
 
   // The robot's subsystems and commands are defined here...
-  private final Drive drive = new Drive(controller::getLeftY, controller::getRightX);
-
-  private final Launcher launcher = new Launcher(); // allows you to bea ble to refer to Launcher() as launcher
-
-<<<<<<< Updated upstream
- // private final RGB rgb = new RGB();
-=======
-  // private final RGB rgb = new RGB();
->>>>>>> Stashed changes
-
+  private final Drive drive = new Drive(controller::getLeftY, controller::getRightY);
+  private final launcherSubsystem launcher = new launcherSubsystem();
+  private final intake intake = new intake();
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    // TODO: Set Default command for the Drive method, to the drive.driveCommand() command
     drive.setDefaultCommand(drive.driveCommand());
-
   }
 
   /**
-   * Use this method to define your trigger->command mappings. 
+   * Use this method to define your trigger->command mappings.
    */
   private void configureBindings() {
-    //controller.a().whileTrue(Launcher.getlaunchCommand());
-    //controller.rightTrigger(.5).whileTrue(Launcher.getlaunchCommand());
-    //controller.rightBumper().whileTrue(launcher.getlaunchCommand());
-    controller.rightTrigger(.5).whileTrue(launcher.getintakeCommand());
-    //controller.rightTrigger(.5).whileTrue(launcher.getspinTopCommand());
-    controller.rightBumper().whileTrue(launcher.spinUpAndShootCommand());
-    // to do the b button you would do .b()
-    // for a trigger you would replace .a() with .rightTrigger("threash hold maybe .5 for example")
- 
+    controller.a().whileTrue(launcher.getLaunchCommand());
+    controller.b().whileTrue(intake.getIntakeCommand());
+    controller.x().whileTrue(intake.getExhaustionCommand());
   }
 
   /**
@@ -69,36 +53,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    //goreturn launcher.getspinTopCommand().andThen(Commands.waitSeconds(2)).andThen(launcher.getlaunchCommand().withTimeout(1)).andThen(drive.drivebackCommand(.8,0).withTimeout(4)); //standard auto command that we made for kitbot
-    final double coolDownTime = 1;
-
-    return launcher.spinUpAndShootCommand() // launch
-    .withTimeout(coolDownTime) // wait for launch to be completed
-    .andThen(drive.drivebackCommand(.8,0)
-    .withTimeout(1)) // go back at 80% power for 3 seconds, back up
-    .andThen(drive.drivebackCommand(0,0) // cool down
-    .withTimeout(coolDownTime)) // cool down for 1 second
-    .andThen(drive.drivebackCommand(0,-.4) //spin at + 30% power for 1.5 seconds, turn right a bit
-    .withTimeout(.15)) //spinnytime
-    .andThen(drive.drivebackCommand(0,0) // cool down
-    .withTimeout(coolDownTime)) // cool down for 1 second
-    .andThen(drive.drivebackCommand(.8,0) // go back a bit
-    .withTimeout(1)) // go back at 80% power for 3 seconds
-    .andThen(drive.drivebackCommand(0,0) // cool down
-    .withTimeout(coolDownTime)) // cool down for 1 second
-    .andThen(drive.drivebackCommand(0,+.4) //spin back to original orientationat + 30% power for 1.5 seconds // spin left a bit
-    .withTimeout(.15)) //spinnytime
-    .andThen(drive.drivebackCommand(0,0) // cool down
-    .withTimeout(coolDownTime)) // cool down for 1 second
-    .andThen(drive.drivebackCommand(.8,0) // go back a bit
-    .withTimeout(1)) // go back at 80% power for 3 seconds
-    .andThen(drive.drivebackCommand(0,0) // cool down
-    .withTimeout(coolDownTime)) // cool down for 1 second
-    .andThen(drive.drivebackCommand(0,1) // go back a bit
-    .withTimeout(.8)) // go back at 80% power for 3 seconds
-    .andThen(drive.drivebackCommand(0,0) // cool down
-    .withTimeout(coolDownTime));
-    
-    //goofy go twords sorce auto positive spin is turn to right and positive go is ? so far
+    return new PrintCommand("Auton");
   }
 }
