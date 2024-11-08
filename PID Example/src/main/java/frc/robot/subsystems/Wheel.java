@@ -9,7 +9,6 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -24,16 +23,16 @@ public class Wheel extends SubsystemBase {
   private SparkPIDController wheelPID;
 
   //PID Controller constants!
-  private double p = 0.25;
-  private double i = 0.003;
-  private double d = 1.5;
+  private double p = 1;
+  private double i = 0;
+  private double d = 0;
   // private double tolerance = 1;
   private double setpoint = 0;
 
   RelativeEncoder wheelEncoder;
   public Wheel() {
     // Populates the wheelMotor field by creating a new CANSparkMax
-    wheelMotor = new CANSparkMax(1, MotorType.kBrushless);
+    wheelMotor = new CANSparkMax(51, MotorType.kBrushless);
 
     // Populates the wheelPID field by getting the PID Controller of the motor controller
     wheelPID = wheelMotor.getPIDController();
@@ -43,8 +42,8 @@ public class Wheel extends SubsystemBase {
     wheelPID.setD(d);
 
     wheelEncoder = wheelMotor.getEncoder();
-    wheelEncoder.setPositionConversionFactor(1/8.14*Math.PI*Units.inchesToMeters(4));
-    wheelEncoder.setVelocityConversionFactor(1/8.14*Math.PI*Units.inchesToMeters(4)/60d);
+    wheelEncoder.setPositionConversionFactor(1);
+    wheelEncoder.setVelocityConversionFactor(1);
     wheelEncoder.setPosition(0);
   }
 

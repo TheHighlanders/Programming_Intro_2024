@@ -4,13 +4,17 @@ public class Ribbot {
     // Instance variables
     private String name;
     private int age;
+    private double numLegs;
+    private String crimeCommited;
 
     // Create a constructor with parameters for name and age (String and int)
-
+    Ribbot(String nameParam, int ageParam) {
+        name = nameParam;
+        age = ageParam;
+      }
     // Initialize the instance variables (give them values)
 
     // Getter for name (Create a function that returns the name)
-    
 
     // Setter for name (Create a function that changes the name to a passed in parameter)
 
