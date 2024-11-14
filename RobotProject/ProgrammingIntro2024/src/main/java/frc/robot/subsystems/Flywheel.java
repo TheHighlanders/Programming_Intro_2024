@@ -10,18 +10,35 @@ import frc.robot.Motor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkPIDController;
+import com.revrobotics.CANSparkBase.ControlType;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import edu.wpi.first.wpilibj2.command.Command;
 
 public class Flywheel extends SubsystemBase {
   /** Creates a new Flywheel. */
-  public Flywheel() {}
+  double setPoint = 1000;
+  CANSparkMax flywheelMotor1;
+  SparkPIDController PID;
+  public Flywheel() {
+    flywheelMotor1 = new CANSparkMax(51,MotorType.kBrushless);
+    PID = flywheelMotor1.getPIDController();
+    PID.setP(1);
+    PID.setI(0);
+    PID.setD(0);
+  }
+
+  public Command spin() {
+    return run(()-> PID.setReference(setPoint,ControlType.kVelocity));
+  }
+
+  public void setSetPoint(double newSetPoint) {
+    setPoint = newSetPoint;
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-  }
-
-  @Override
-  public void simulationPeriodic() {
-    
   }
 }
