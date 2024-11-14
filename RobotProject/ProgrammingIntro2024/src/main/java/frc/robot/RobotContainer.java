@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Subsubsystem;
+import frc.robot.subsystems.FlywheelPID;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -23,10 +23,10 @@ import frc.robot.subsystems.Subsubsystem;
 public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController controller = new CommandXboxController(0);
-
+  private final FlywheelPID moveThingy = new FlywheelPID();
   // The robot's subsystems and commands are defined here...
   private final Drive drive = new Drive(controller::getRightY, controller::getRightX);
-  private final Subsubsystem luncher = new Subsubsystem();
+  // private final Subsubsystem luncher = new Subsubsystem();
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -41,9 +41,9 @@ public class RobotContainer {
    * Use this method to define your trigger->command mappings. 
    */
   private void configureBindings() {
-    controller.a().whileTrue(luncher.launchCMD());
-    controller.b().whileTrue(luncher.intakeCMD());
-    controller.y().whileTrue(luncher.spinUpCMD());
+    // controller.a().whileTrue(luncher.launchCMD());
+    // controller.b().whileTrue(luncher.intakeCMD());
+    // controller.y().whileTrue(luncher.spinUpCMD());
   }
 
   /**
@@ -53,6 +53,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return luncher.spinUpCMD().andThen(Commands.waitSeconds(2)).andThen(luncher.launchCMD().withTimeout(1));
+    return moveThingy.setPoint(1000);
   }
 }
