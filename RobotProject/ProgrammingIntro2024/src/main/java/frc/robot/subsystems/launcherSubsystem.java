@@ -38,18 +38,18 @@ public class launcherSubsystem extends SubsystemBase {
 
 //flywheel 
 public void startFlyWheel1() {
-motorUp.set(1);
+  motorUp.set(1);
 }
 public void startFlyWheel2() {
-motorDown.set(1);
+  motorDown.set(1);
 }
 public void stop() {
-motorUp.set(0);
-motorDown.set(0);
+  motorUp.set(0);
+  motorDown.set(0);
 }
 public void intake(){
-motorUp.set(0.5);
-motorDown.set(0.5);
+  motorUp.set(0.5);
+  motorDown.set(0.5);
 }
 public Command getLaunchCommand(){
 return new RunCommand(()->{
