@@ -27,10 +27,10 @@ public class RobotContainer {
   private final CommandXboxController controller = new CommandXboxController(0);
 
   // The robot's subsystems and commands are defined here...
-  private final Drive drive = new Drive(controller::getRightY, controller::getRightX); 
+  /**private final Drive drive = new Drive(controller::getRightY, controller::getRightX); 
   private final launcherSubsystem launcher = new launcherSubsystem();
-  private final Intake Intake = new Intake();
-  private final Flywheel flywheel = new Flywheel();
+  private final Intake intake = new Intake();
+  */private final Flywheel flywheel = new Flywheel();
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -38,16 +38,16 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     // TODO: Set Default command for the Drive method, to the drive.driveCommand() command
-    drive.setDefaultCommand(drive.driveCommand());
+    //drive.setDefaultCommand(drive.driveCommand());
   }
 
   /**
    * Use this method to define your trigger->command mappings. 
    */
   private void configureBindings() {
-    controller.a().whileTrue(launcher.getLaunchCommand());
-    controller.y().whileTrue(Intake.getStartCommand());
-    controller.b().whileTrue(Intake.getBackwardsCommand());
+    // controller.a().whileTrue(launcher.getLaunchCommand());
+    // controller.y().whileTrue(intake.getStartCommand());
+    // controller.b().whileTrue(intake.getBackwardsCommand());
   }
 
   /**

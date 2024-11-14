@@ -24,8 +24,8 @@ public class Flywheel extends SubsystemBase {
   public Flywheel() {
     flywheelMotor1 = new CANSparkMax(51,MotorType.kBrushless);
     PID = flywheelMotor1.getPIDController();
-    PID.setP(1);
-    PID.setI(0);
+    PID.setP(0.0002);
+    PID.setI(0.00000048);
     PID.setD(0);
   }
 
@@ -40,5 +40,7 @@ public class Flywheel extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("setPoint", setPoint);
+    SmartDashboard.putNumber("velocity",flywheelMotor1.getEncoder().getVelocity());
   }
 }
