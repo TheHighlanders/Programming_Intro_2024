@@ -5,13 +5,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.launcherSubsystem;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Flywheel;
+//import frc.robot.subsystems.launcherSubsystem;
+//import frc.robot.subsystems.Intake;
+//import frc.robot.subsystems.Flywheel;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -30,7 +32,8 @@ public class RobotContainer {
   /**private final Drive drive = new Drive(controller::getRightY, controller::getRightX); 
   private final launcherSubsystem launcher = new launcherSubsystem();
   private final Intake intake = new Intake();
-  */private final Flywheel flywheel = new Flywheel();
+  */
+  //private final Flywheel flywheel = new Flywheel();
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -57,7 +60,13 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return flywheel.spin();
+    Command luxembourg = new PrintCommand("WOW!");
+    Command red = new PrintCommand("Its a banana!");
+    Command green = new PrintCommand("This is tasty");
+    Command violet = new PrintCommand("I like bananas");
+    Command emerald = new WaitCommand(5);
+    Command lithuania = new WaitCommand(2);
+    return Commands.sequence(luxembourg.alongWith(red),emerald,green,lithuania,violet);
     
   }
 }
