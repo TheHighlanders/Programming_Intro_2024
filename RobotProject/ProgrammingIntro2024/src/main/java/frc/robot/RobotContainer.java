@@ -5,11 +5,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.intake;
-import frc.robot.subsystems.launcherSubsystem;
+//import frc.robot.subsystems.intake;
+////////import frc.robot.subsystems.launcherSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -25,25 +26,25 @@ public class RobotContainer {
   private final CommandXboxController controller = new CommandXboxController(0);
 
   // The robot's subsystems and commands are defined here...
-  private final Drive drive = new Drive(controller::getLeftY, controller::getRightY);
-  private final launcherSubsystem launcher = new launcherSubsystem();
-  private final intake intake = new intake();
+ // private final Drive drive = new Drive(controller::getLeftY, controller::getRightY);
+ ///////////// private final launcherSubsystem launcher = new launcherSubsystem();
+  // private final intake intake = new intake();
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    drive.setDefaultCommand(drive.driveCommand());
+  //  drive.setDefaultCommand(drive.driveCommand());
   }
 
   /**
    * Use this method to define your trigger->command mappings.
    */
   private void configureBindings() {
-    controller.a().whileTrue(launcher.getLaunchCommand());
-    controller.b().whileTrue(intake.getIntakeCommand());
-    controller.x().whileTrue(intake.getExhaustionCommand());
+ //////////////   controller.a().whileTrue(launcher.getLaunchCommand());
+  //  controller.b().whileTrue(Intake.getIntakeCommand());
+ //   controller.x().whileTrue(Intake.getExhaustionCommand());
   }
 
   /**
@@ -53,6 +54,8 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return new PrintCommand("Auton");
+    //return Commands.sequence(new PrintCommand(" A&B"), Commands.waitSeconds(5), new PrintCommand("C"), Commands.waitSeconds(2), new PrintCommand("D"));
+    //return new raceCommandGroup();
+    return Commands.race(new PrintCommand("nye"), new PrintCommand("lex").withTimeout(100000));
   }
 }
