@@ -9,10 +9,10 @@ import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.units.Angle;
+
 
 /** Add your docs here. */
-public class CoolestModuleEVER {
+public class Module {
     CANSparkMax coolestDriving;
     CANSparkMax coolestRotation;
     SparkPIDController coolestDrivingPID;
@@ -20,20 +20,20 @@ public class CoolestModuleEVER {
 
 
 
-public CoolestModuleEVER() {
-    coolestDriving = new CANSparkMax(1, MotorType.kBrushless);
-    coolestRotation = new CANSparkMax(2, MotorType.kBrushless);
+public Module(int driveID, int rotateID) {
+    coolestDriving = new CANSparkMax(driveID, MotorType.kBrushless);
+    coolestRotation = new CANSparkMax(rotateID, MotorType.kBrushless);
 
     coolestDrivingPID = coolestDriving.getPIDController();
     coolestRotationPID = coolestRotation.getPIDController();
     
-    coolestDrivingPID.setP(1);
-    coolestDrivingPID.setI(1);
-    coolestDrivingPID.setD(1);
+    coolestDrivingPID.setP(0.5);
+    coolestDrivingPID.setI(0);
+    coolestDrivingPID.setD(0);
 
-    coolestRotationPID.setP(1);
-    coolestRotationPID.setI(1);
-    coolestRotationPID.setD(1);
+    coolestRotationPID.setP(0.5);
+    coolestRotationPID.setI(0);
+    coolestRotationPID.setD(0);
 
     coolestDriving.getEncoder().setPositionConversionFactor(0.468675);
     coolestRotation.getEncoder().setPositionConversionFactor(28.125);
