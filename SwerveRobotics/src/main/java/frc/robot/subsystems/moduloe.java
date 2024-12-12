@@ -37,7 +37,7 @@ public class moduloe {
         rotate.getEncoder().setPositionConversionFactor(28.125);
     }
 
-    public void setModuleState(SwerveModuleState state) {
+    public void setModuleState(SwerveModuleState state) {               //swerveModuleState example (see 12/12/24 notes for more info)
         double speed = state.speedMetersPerSecond;
         double rotation = state.angle.getDegrees();
 
