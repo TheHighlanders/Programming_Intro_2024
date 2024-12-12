@@ -1,45 +1,54 @@
-package frc.robot.subsystems;
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkLowLevel.MotorType;
+package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
 
-public class intake extends SubsystemBase {
-    CANSparkMax intakeMotor;
+public class Intake extends SubsystemBase {
+  /** Creates a new Intake. **/
+  CANSparkMax intakeMotor;
+  public Intake() {
+     intakeMotor = new CANSparkMax(8,MotorType.kBrushless);
+  }
 
-    public intake() {
-        intakeMotor = new CANSparkMax(8, MotorType.kBrushless);
-    }
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
 
-    public void intakingNote() {
-        intakeMotor.set(1);
-    }
+  public void forward(){
+  intakeMotor.set(1);
+  }
 
-    public void intakeExhaustion() {
-        intakeMotor.set(-1);
-    }
+  public void backwards(){
+  intakeMotor.set(-0.5);
+  }
 
-    public void stop() {
-        intakeMotor.set(0);
-    }
+  public void stop(){
+  intakeMotor.set(0);
+  }
 
-    public Command getIntakeCommand() {
-        return new RunCommand(
-                () -> {
-                    intakingNote();
-                })
-                .finallyDo(() -> stop());
-    }
+  public Command getStartCommand(){
+    return new RunCommand(()->{
+       forward();
+    }).finallyDo(()-> stop ());
+  }
 
-    public Command getExhaustionCommand() {
-        return new RunCommand(
-                () -> {
-                    intakeExhaustion();
-                })
-                .finallyDo(() -> stop());
-    }
+  public Command getBackwardsCommand(){
+  return new RunCommand(()->{
+    backwards();
+  }).finallyDo(()-> stop ());
+  }
 
+  public Command getStopCommand(){
+    return new RunCommand(()->{
+      stop();
+    });
+  }
 }
