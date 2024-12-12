@@ -17,7 +17,7 @@ public class Modulito {
     SparkPIDController drivePID;
     SparkPIDController rotatePID;
 
-    public Modulito() {   //the method that defines the parameters of the module
+    public Modulito(int driveID, int rotateID) {   //the method that defines the parameters of the module
         drive = new CANSparkMax(3, MotorType.kBrushless);
         rotate = new CANSparkMax(2, MotorType.kBrushless);
         drivePID = drive.getPIDController();

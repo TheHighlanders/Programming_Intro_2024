@@ -8,7 +8,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Swerve extends SubsystemBase {
   /** Creates a new Swerve. */
+  Modulito[] modulitos = {
+    new Modulito(0,1), 
+    new Modulito(2,3), 
+    new Modulito(4,5), 
+    new Modulito(6,7)
+  };
+
   public Swerve() {}
+
+  public void drive() {
+    modulitos[0].setThisModuleState(new SwerveModuleState(3, new Rotation2D.fromDegrees(200)))
+  }
 
   @Override
   public void periodic() {
