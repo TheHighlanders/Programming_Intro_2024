@@ -13,9 +13,9 @@ public class Swerve extends SubsystemBase {
 
   Module[] modules = {
     new Module(0,1),
-    new Module(0,1),
-    new Module(0,1),
-    new Module(0,1)}; // makes 4 new swerve modules. each mdoule can be called bu using a number with in the square brakets "[]"
+    new Module(2,3),
+    new Module(4,5),
+    new Module(6,7)}; // makes 4 new swerve modules. each mdoule can be called bu using a number with in the square brakets "[]"
 
 
   public Swerve() {}
