@@ -18,7 +18,7 @@ public class Swerve extends SubsystemBase {
   public Swerve() {}
 
   public void drive() {
-    modulitos[0].setThisModuleState(new SwerveModuleState(3, new Rotation2D.fromDegrees(200)))
+    modulitos[0].setThisModuleState(new SwerveModuleState(3, new Rotation2D.fromDegrees(200)));
   }
 
   @Override
